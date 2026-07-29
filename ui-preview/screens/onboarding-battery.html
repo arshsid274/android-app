@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Battery Optimization - Sentience Core</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e1e3e4",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface-variant": "#e1e3e4",
+                        "surface-container": "#edeeef",
+                        "surface": "#f8f9fa",
+                        "secondary": "#006972",
+                        "on-surface-variant": "#414754",
+                        "on-primary-container": "#ffffff",
+                        "on-secondary-container": "#006d77",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#2e3132",
+                        "primary": "#005bbf",
+                        "inverse-primary": "#adc7ff",
+                        "tertiary-fixed": "#ffdad6",
+                        "primary-fixed-dim": "#adc7ff",
+                        "on-surface": "#191c1d",
+                        "on-tertiary-fixed": "#410003",
+                        "tertiary-fixed-dim": "#ffb3ac",
+                        "primary-fixed": "#d8e2ff",
+                        "surface-dim": "#d9dadb",
+                        "secondary-container": "#8feefc",
+                        "on-secondary-fixed-variant": "#004f56",
+                        "on-secondary-fixed": "#001f23",
+                        "surface-bright": "#f8f9fa",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-tint": "#005bc0",
+                        "tertiary-container": "#dd3635",
+                        "outline": "#727785",
+                        "on-tertiary-fixed-variant": "#930010",
+                        "on-primary-fixed-variant": "#004493",
+                        "tertiary": "#b91a20",
+                        "secondary-fixed-dim": "#75d5e2",
+                        "on-secondary": "#ffffff",
+                        "background": "#f8f9fa",
+                        "primary-container": "#1a73e8",
+                        "secondary-fixed": "#92f1fe",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#c1c6d6",
+                        "error-container": "#ffdad6",
+                        "on-background": "#191c1d",
+                        "surface-container-low": "#f3f4f5",
+                        "on-primary-fixed": "#001a41",
+                        "surface-container-high": "#e7e8e9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "margin-mobile": "16px",
+                        "xs": "4px",
+                        "gutter": "16px",
+                        "lg": "24px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "margin-desktop": "64px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["JetBrains Mono"],
+                        "label-lg": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Blueprint Grid Pattern */
+        .blueprint-grid {
+            background-size: 40px 40px, 40px 40px, 8px 8px, 8px 8px;
+            background-image: 
+                linear-gradient(to right, rgba(0, 91, 191, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 91, 191, 0.1) 1px, transparent 1px),
+                linear-gradient(to right, rgba(0, 91, 191, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 91, 191, 0.03) 1px, transparent 1px);
+        }
+        
+        /* Level 1 Card Elevation */
+        .elevation-1 {
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-sans relative overflow-x-hidden">
+<!-- Ambient Blueprint Background -->
+<div class="absolute inset-0 blueprint-grid pointer-events-none z-0"></div>
+<!-- TopAppBar -->
+<header class="bg-surface border-b border-outline-variant flex justify-between items-center w-full px-margin-mobile py-base sticky top-0 z-50">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">terminal</span>
+<span class="font-label-lg text-label-lg font-black text-primary tracking-tighter">SENTIENCE CORE</span>
+</div>
+<button class="font-headline-sm text-headline-sm uppercase tracking-wider text-tertiary font-bold hover:bg-error-container hover:text-on-error-container transition-colors duration-150 active:scale-95 px-sm py-xs rounded">
+            KILL SWITCH
+        </button>
+</header>
+<!-- Main Content Canvas (Onboarding/Permission flow -> BottomNav suppressed) -->
+<main class="flex-1 flex flex-col items-center justify-center p-margin-mobile md:p-margin-desktop relative z-10 w-full max-w-4xl mx-auto">
+<!-- Technical Icon Cluster -->
+<div class="relative w-32 h-32 md:w-40 md:h-40 flex items-center justify-center mb-lg">
+<!-- Concentric Rings -->
+<div class="absolute inset-0 rounded-full border-2 border-primary-fixed-dim/30 animate-[spin_12s_linear_infinite]"></div>
+<div class="absolute inset-xs rounded-full border border-primary/20 border-dashed animate-[spin_15s_linear_infinite_reverse]"></div>
+<div class="absolute inset-sm rounded-full bg-primary-container/10 flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined text-5xl md:text-6xl text-primary" style="font-variation-settings: 'FILL' 1;">battery_charging_full</span>
+</div>
+<!-- Status pip -->
+<div class="absolute bottom-2 right-2 w-3 h-3 bg-tertiary rounded-full animate-pulse border border-background"></div>
+</div>
+<!-- Typography -->
+<div class="text-center max-w-lg mb-xl">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface mb-sm">Persistent Intelligence</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                Sentience Core requires unrestricted background activity to provide real-time drafting assistance without interruptions. Disable battery optimization to ensure the assistant is always ready.
+            </p>
+</div>
+<!-- Detail Callout Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg w-full max-w-md mb-xl elevation-1 flex items-start gap-md">
+<div class="bg-surface-container p-sm rounded-full flex-shrink-0">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 0;">memory</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-xs">Efficiency & Impact</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    Low overhead. Our local LLM processing is optimized for thermal efficiency and long-term battery health.
+                </p>
+</div>
+</div>
+<!-- Action Area -->
+<div class="w-full max-w-md flex flex-col gap-sm">
+<button class="w-full bg-primary text-on-primary py-sm px-lg rounded font-label-lg text-label-lg uppercase tracking-wider hover:bg-surface-tint transition-colors elevation-1 active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-on-primary" style="font-size: 18px;">lock_open</span>
+                Disable Battery Optimization
+            </button>
+<button class="w-full text-primary py-sm px-lg rounded font-label-lg text-label-lg uppercase tracking-wider hover:bg-surface-container transition-colors active:scale-95">
+                Maybe Later
+            </button>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Diagnostics - Sentience Core</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c1c6d6",
+                        "secondary-fixed": "#92f1fe",
+                        "on-secondary-container": "#006d77",
+                        "secondary": "#006972",
+                        "on-background": "#191c1d",
+                        "on-secondary": "#ffffff",
+                        "background": "#f8f9fa",
+                        "primary-container": "#1a73e8",
+                        "surface-dim": "#d9dadb",
+                        "primary": "#005bbf",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#8feefc",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#ffdad6",
+                        "surface": "#f8f9fa",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#001f23",
+                        "tertiary-container": "#dd3635",
+                        "surface-tint": "#005bc0",
+                        "on-tertiary-fixed-variant": "#930010",
+                        "tertiary": "#b91a20",
+                        "on-tertiary-container": "#ffffff",
+                        "on-primary-container": "#ffffff",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#d8e2ff",
+                        "on-primary-fixed-variant": "#004493",
+                        "inverse-primary": "#adc7ff",
+                        "surface-bright": "#f8f9fa",
+                        "on-tertiary-fixed": "#410003",
+                        "primary-fixed-dim": "#adc7ff",
+                        "inverse-surface": "#2e3132",
+                        "surface-container-low": "#f3f4f5",
+                        "on-surface": "#191c1d",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#ffb3ac",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#001a41",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface-container-high": "#e7e8e9",
+                        "outline": "#727785",
+                        "on-secondary-fixed-variant": "#004f56",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#414754",
+                        "surface-container": "#edeeef",
+                        "surface-variant": "#e1e3e4",
+                        "secondary-fixed-dim": "#75d5e2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "xs": "4px",
+                        "base": "8px",
+                        "margin-desktop": "64px",
+                        "xl": "32px",
+                        "margin-mobile": "16px",
+                        "md": "16px",
+                        "sm": "12px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "label-sm": ["JetBrains Mono"],
+                        "label-lg": ["JetBrains Mono"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "label-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .blueprint-bg {
+            background-color: #f8f9fa;
+            background-image: 
+                linear-gradient(rgba(0, 91, 191, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 91, 191, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .pulse-ring {
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        .terminal-scroll {
+            scrollbar-width: thin;
+            scrollbar-color: #c1c6d6 transparent;
+        }
+        .terminal-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .terminal-scroll::-webkit-scrollbar-thumb {
+            background-color: #c1c6d6;
+            border-radius: 4px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background blueprint-bg min-h-screen flex flex-col font-sans">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-on-background text-primary dark:text-primary-fixed-dim font-headline-sm text-headline-sm uppercase tracking-wider docked full-width top-0 border-b border-outline-variant dark:border-outline flat no shadows transition-colors duration-150 active:scale-95 flex justify-between items-center w-full px-margin-mobile py-base sticky z-40 h-[64px]">
+<div class="flex items-center gap-base">
+<span class="material-symbols-outlined text-[24px]">terminal</span>
+<span class="font-label-lg text-label-lg font-black text-primary dark:text-primary-fixed-dim tracking-tighter">SENTIENCE CORE</span>
+</div>
+<button class="bg-error text-on-error px-4 py-2 rounded-lg font-label-lg text-label-lg uppercase shadow-md hover:bg-tertiary-container hover:shadow-lg transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">power_settings_new</span>
+            KILL SWITCH
+        </button>
+</header>
+<!-- Main Content -->
+<main class="flex-grow p-margin-mobile md:p-margin-desktop max-w-[1200px] mx-auto w-full mb-[80px] grid grid-cols-1 md:grid-cols-12 gap-md md:gap-lg">
+<!-- Header -->
+<div class="col-span-1 md:col-span-12 mb-2">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">Diagnostics / SelectorMap</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">System health and DOM mapping performance metrics.</p>
+</div>
+<!-- System Health Overview -->
+<section class="col-span-1 md:col-span-4 bg-surface rounded-xl border border-outline-variant shadow-sm p-lg flex flex-col gap-md relative overflow-hidden">
+<div class="flex justify-between items-center z-10">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">System Health</h2>
+<div class="relative w-4 h-4 flex items-center justify-center">
+<div class="absolute w-full h-full bg-secondary rounded-full pulse-ring"></div>
+<div class="w-2 h-2 bg-secondary rounded-full z-10"></div>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-sm z-10">
+<div class="flex justify-between items-baseline border-b border-outline-variant/30 pb-2">
+<span class="font-body-md text-body-md text-on-surface-variant">Uptime</span>
+<span class="font-label-lg text-label-lg text-on-surface">34d 12h 4m</span>
+</div>
+<div class="flex justify-between items-baseline border-b border-outline-variant/30 pb-2">
+<span class="font-body-md text-body-md text-on-surface-variant">Selector Accuracy</span>
+<span class="font-label-lg text-label-lg text-secondary">99.4%</span>
+</div>
+<div class="flex justify-between items-baseline pb-2">
+<span class="font-body-md text-body-md text-on-surface-variant">Avg Latency</span>
+<span class="font-label-lg text-label-lg text-on-surface">12ms</span>
+</div>
+</div>
+<!-- Decorative Background Element -->
+<div class="absolute -bottom-10 -right-10 text-outline-variant/20">
+<span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">health_and_safety</span>
+</div>
+</section>
+<!-- Hardware & Buffer Stats -->
+<section class="col-span-1 md:col-span-8 grid grid-cols-2 gap-md">
+<div class="bg-surface rounded-xl border border-outline-variant shadow-sm p-md flex flex-col gap-2">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">memory</span>
+<h3 class="font-label-lg text-label-lg uppercase">In-Memory Buffer</h3>
+</div>
+<div class="flex items-end gap-2 mt-auto">
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">24.5</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mb-1">MB / 128 MB</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 mt-2 overflow-hidden">
+<div class="bg-primary h-1.5 rounded-full" style="width: 20%"></div>
+</div>
+</div>
+<div class="bg-surface rounded-xl border border-outline-variant shadow-sm p-md flex flex-col gap-2">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">queue</span>
+<h3 class="font-label-lg text-label-lg uppercase">Event Queue</h3>
+</div>
+<div class="flex items-end gap-2 mt-auto">
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">12</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mb-1">pending</span>
+</div>
+<div class="flex gap-1 mt-2">
+<div class="h-1.5 w-1/4 bg-secondary rounded-full"></div>
+<div class="h-1.5 w-1/4 bg-surface-container-highest rounded-full"></div>
+<div class="h-1.5 w-1/4 bg-surface-container-highest rounded-full"></div>
+<div class="h-1.5 w-1/4 bg-surface-container-highest rounded-full"></div>
+</div>
+</div>
+</section>
+<!-- SelectorMap Status -->
+<section class="col-span-1 md:col-span-12 bg-surface rounded-xl border border-outline-variant shadow-sm overflow-hidden flex flex-col">
+<div class="p-md border-b border-outline-variant bg-surface-container-lowest flex justify-between items-center">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">SelectorMap Status</h2>
+<button class="text-primary hover:bg-primary-container hover:text-on-primary-container p-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-[20px]">refresh</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low font-label-sm text-label-sm text-on-surface-variant uppercase border-b border-outline-variant">
+<th class="p-sm font-medium">Application Target</th>
+<th class="p-sm font-medium">Status</th>
+<th class="p-sm font-medium">DOM Element</th>
+<th class="p-sm font-medium text-right">Confidence</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface divide-y divide-outline-variant/50">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-sm font-label-lg text-label-lg">WhatsApp (v2.24.x)</td>
+<td class="p-sm">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">STABLE</span>
+</td>
+<td class="p-sm font-label-sm text-label-sm text-on-surface-variant">chat_input_field</td>
+<td class="p-sm text-right font-label-sm text-label-sm text-secondary">100%</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-sm font-label-lg text-label-lg">WhatsApp (v2.24.x)</td>
+<td class="p-sm">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">STABLE</span>
+</td>
+<td class="p-sm font-label-sm text-label-sm text-on-surface-variant">send_button_icon</td>
+<td class="p-sm text-right font-label-sm text-label-sm text-secondary">98%</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors bg-error-container/20">
+<td class="p-sm font-label-lg text-label-lg">Telegram (v10.5.x)</td>
+<td class="p-sm">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-[#f59e0b]/10 text-[#d97706] border border-[#f59e0b]/20">RE-MAPPING</span>
+</td>
+<td class="p-sm font-label-sm text-label-sm text-on-surface-variant">message_list_container</td>
+<td class="p-sm text-right font-label-sm text-label-sm text-[#d97706]">65%</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-sm font-label-lg text-label-lg">Signal (v7.1.x)</td>
+<td class="p-sm">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">STABLE</span>
+</td>
+<td class="p-sm font-label-sm text-label-sm text-on-surface-variant">attachment_menu</td>
+<td class="p-sm text-right font-label-sm text-label-sm text-secondary">92%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Real-time Event Stream -->
+<section class="col-span-1 md:col-span-12 bg-on-background rounded-xl border border-outline-variant shadow-sm flex flex-col h-[250px]">
+<div class="p-sm border-b border-outline/30 flex justify-between items-center bg-inverse-surface rounded-t-xl">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-outline">code</span>
+<h2 class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Event Stream</h2>
+</div>
+<div class="flex gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-error"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-[#f59e0b]"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-secondary"></div>
+</div>
+</div>
+<div class="p-sm flex-grow overflow-y-auto terminal-scroll bg-[#0d1117] rounded-b-xl" id="terminal-log">
+<div class="font-label-sm text-label-sm text-[#8b949e] flex gap-4 mb-1">
+<span class="shrink-0">[14:22:01]</span>
+<span class="text-[#e6edf3]">Hooked into 'net.whatsapp.core'</span>
+</div>
+<div class="font-label-sm text-label-sm text-[#8b949e] flex gap-4 mb-1">
+<span class="shrink-0">[14:22:02]</span>
+<span class="text-[#e6edf3]">Initializing DOM scanner module...</span>
+</div>
+<div class="font-label-sm text-label-sm text-[#8b949e] flex gap-4 mb-1">
+<span class="shrink-0">[14:22:05]</span>
+<span class="text-secondary">Successfully mapped 'chat_input' [Confidence: 100%]</span>
+</div>
+<div class="font-label-sm text-label-sm text-[#8b949e] flex gap-4 mb-1">
+<span class="shrink-0">[14:22:07]</span>
+<span class="text-[#e6edf3]">Awaiting injection payload from core...</span>
+</div>
+<div class="font-label-sm text-label-sm text-[#8b949e] flex gap-4 mb-1">
+<span class="shrink-0">[14:22:10]</span>
+<span class="text-secondary">Draft injected successfully into 'chat_input'.</span>
+</div>
+<div class="font-label-sm text-label-sm text-[#8b949e] flex gap-4 mb-1">
+<span class="shrink-0">[14:22:15]</span>
+<span class="text-[#e6edf3]">Scanning 'org.telegram.messenger' DOM structure...</span>
+</div>
+<div class="font-label-sm text-label-sm text-[#8b949e] flex gap-4 mb-1">
+<span class="shrink-0">[14:22:16]</span>
+<span class="text-[#f59e0b]">Warning: 'message_list_container' node structure changed.</span>
+</div>
+<div class="font-label-sm text-label-sm text-[#8b949e] flex gap-4 mb-1">
+<span class="shrink-0">[14:22:18]</span>
+<span class="text-[#e6edf3]">Initiating heuristic re-mapping sequence...</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-surface-container dark:bg-surface-dim text-primary dark:text-primary-fixed-dim font-label-sm text-label-sm docked full-width bottom-0 z-50 bg-surface-container dark:bg-surface-container-highest border-t border-outline-variant flat no shadows scale-100 active:scale-90 transition-transform fixed bottom-0 w-full flex justify-around items-center px-gutter py-sm md:hidden block">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline p-2 hover:text-primary dark:hover:text-primary-fixed group transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px] mb-1 group-hover:scale-110 transition-transform">grid_view</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline p-2 hover:text-primary dark:hover:text-primary-fixed group transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px] mb-1 group-hover:scale-110 transition-transform">chat_bubble_outline</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-container dark:text-secondary-fixed rounded-xl p-2 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px] mb-1" style="font-variation-settings: 'FILL' 1;">analytics</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline p-2 hover:text-primary dark:hover:text-primary-fixed group transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px] mb-1 group-hover:scale-110 transition-transform">settings</span>
+</a>
+</nav>
+<!-- Desktop Side Nav (Hypothetical, hidden on mobile to match requirements for web nav cluster) -->
+<!-- For this specific layout request, navigation is pushed to the bottom per standard app patterns, 
+         but adhering to the "Hidden md:flex" rule for top bar cluster in a real app. 
+         I will add standard top nav links to the header for md+ screens. -->
+<script>
+        // Auto-scroll terminal to bottom
+        const terminal = document.getElementById('terminal-log');
+        if(terminal) {
+            terminal.scrollTop = terminal.scrollHeight;
+        }
+    </script>
+</body></html>

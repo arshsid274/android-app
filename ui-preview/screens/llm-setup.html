@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LLM Configuration - Sentience Core</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed": "#410003",
+                      "surface-container-highest": "#e1e3e4",
+                      "secondary": "#006972",
+                      "secondary-fixed": "#92f1fe",
+                      "secondary-container": "#8feefc",
+                      "primary": "#005bbf",
+                      "tertiary-fixed-dim": "#ffb3ac",
+                      "background": "#f8f9fa",
+                      "tertiary": "#b91a20",
+                      "on-tertiary-fixed-variant": "#930010",
+                      "on-primary-fixed-variant": "#004493",
+                      "surface-bright": "#f8f9fa",
+                      "primary-fixed": "#d8e2ff",
+                      "on-secondary-container": "#006d77",
+                      "on-secondary": "#ffffff",
+                      "on-surface-variant": "#414754",
+                      "surface-tint": "#005bc0",
+                      "on-secondary-fixed": "#001f23",
+                      "error": "#ba1a1a",
+                      "tertiary-container": "#dd3635",
+                      "on-background": "#191c1d",
+                      "error-container": "#ffdad6",
+                      "surface-variant": "#e1e3e4",
+                      "on-error": "#ffffff",
+                      "surface-dim": "#d9dadb",
+                      "on-error-container": "#93000a",
+                      "surface-container": "#edeeef",
+                      "on-secondary-fixed-variant": "#004f56",
+                      "on-primary-container": "#ffffff",
+                      "tertiary-fixed": "#ffdad6",
+                      "on-tertiary-container": "#ffffff",
+                      "surface-container-high": "#e7e8e9",
+                      "outline-variant": "#c1c6d6",
+                      "inverse-on-surface": "#f0f1f2",
+                      "on-primary": "#ffffff",
+                      "outline": "#727785",
+                      "surface": "#f8f9fa",
+                      "secondary-fixed-dim": "#75d5e2",
+                      "primary-fixed-dim": "#adc7ff",
+                      "inverse-surface": "#2e3132",
+                      "surface-container-low": "#f3f4f5",
+                      "primary-container": "#1a73e8",
+                      "on-primary-fixed": "#001a41",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "inverse-primary": "#adc7ff",
+                      "on-surface": "#191c1d"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "sm": "12px",
+                      "margin-desktop": "64px",
+                      "lg": "24px",
+                      "xl": "32px",
+                      "gutter": "16px",
+                      "md": "16px",
+                      "margin-mobile": "16px",
+                      "xs": "4px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Inter"],
+                      "label-lg": ["JetBrains Mono"],
+                      "headline-lg-mobile": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-sm": ["Inter"],
+                      "label-sm": ["JetBrains Mono"]
+              },
+              "fontSize": {
+                      "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                      "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .grid-pattern {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(114, 119, 133, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(114, 119, 133, 0.1) 1px, transparent 1px);
+        }
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md grid-pattern relative">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface border-b border-outline-variant flat no shadows flex justify-between items-center px-margin-mobile py-base w-full max-w-screen-xl mx-auto">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary font-variation-settings: 'FILL' 1;" data-icon="memory" data-weight="fill">memory</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Sentience Core</h1>
+</div>
+<div>
+<button class="bg-tertiary text-on-tertiary font-label-lg text-label-lg px-4 py-2 rounded font-bold tracking-wider hover:opacity-90 transition-opacity flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+                KILL SWITCH
+            </button>
+</div>
+</header>
+<!-- Main Content Canvas - Suppressed Navigation Shell as it's a linear onboarding flow -->
+<main class="flex-grow flex items-center justify-center p-margin-mobile md:p-margin-desktop mt-20 relative z-10">
+<!-- Onboarding Card (Level 1 Elevation) -->
+<div class="bg-surface rounded-xl border border-outline-variant shadow-[0_2px_4px_rgba(0,0,0,0.05)] w-full max-w-2xl overflow-hidden flex flex-col">
+<!-- Card Header -->
+<div class="p-xl border-b border-surface-variant flex flex-col gap-base">
+<div class="flex justify-between items-center">
+<span class="bg-surface-container-high text-on-surface-variant px-2 py-1 rounded font-label-sm text-label-sm tracking-widest uppercase">
+                        Step 5 of 6
+                    </span>
+<span class="material-symbols-outlined text-outline" data-icon="dns">dns</span>
+</div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background mt-sm">Configure AI Engine</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    Sentience Core requires an LLM to generate reply drafts. Your API key is stored encrypted on-device.
+                </p>
+</div>
+<!-- Card Body / Form -->
+<div class="p-xl flex flex-col gap-lg bg-surface-bright">
+<!-- Model Selection -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-lg text-label-lg text-on-surface" for="model-select">Model Provider</label>
+<div class="relative">
+<select class="w-full bg-surface-container-lowest border border-outline text-on-surface rounded-lg px-md py-sm font-body-md text-body-md appearance-none focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" id="model-select">
+<option value="gpt-4o">GPT-4o (Recommended)</option>
+<option value="gpt-4o-mini">GPT-4o-mini (Fast)</option>
+<option value="claude-3-5-sonnet">Claude 3.5 Sonnet</option>
+<option value="custom">Custom Endpoint</option>
+</select>
+<span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 text-outline pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<!-- Custom Endpoint (Hidden by default) -->
+<div class="flex flex-col gap-xs hidden" id="custom-endpoint-field">
+<label class="font-label-lg text-label-lg text-on-surface" for="endpoint-url">Base URL / Endpoint</label>
+<input class="w-full bg-surface-container-lowest border border-outline text-on-surface rounded-lg px-md py-sm font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all placeholder:text-outline-variant" id="endpoint-url" placeholder="https://api.example.com/v1" type="url"/>
+</div>
+<!-- API Key Input -->
+<div class="flex flex-col gap-xs">
+<div class="flex justify-between items-center">
+<label class="font-label-lg text-label-lg text-on-surface" for="api-key">API Key</label>
+<a class="font-body-md text-body-md text-primary hover:underline flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[16px]" data-icon="help">help</span>
+                            Where do I get a key?
+                        </a>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline" data-icon="key">key</span>
+<input class="w-full bg-surface-container-lowest border border-outline text-on-surface rounded-lg pl-[44px] pr-[44px] py-sm font-label-lg text-label-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all tracking-widest placeholder:tracking-normal" id="api-key" placeholder="sk-..." type="password"/>
+<button class="absolute right-md top-1/2 -translate-y-1/2 text-outline hover:text-on-surface transition-colors focus:outline-none flex items-center justify-center" id="toggle-visibility" type="button">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</div>
+</div>
+<!-- Test Connection Action -->
+<div class="flex items-center gap-md mt-sm">
+<button class="bg-surface-container-high hover:bg-surface-variant text-on-surface-variant font-label-lg text-label-lg px-md py-sm rounded border border-outline-variant transition-colors flex items-center gap-2" id="test-connection-btn" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="swap_calls">swap_calls</span>
+                        Test Connection
+                    </button>
+<!-- Connection Status Indicators (Hidden initially) -->
+<div class="hidden flex items-center gap-2 bg-secondary/10 text-secondary px-3 py-1.5 rounded font-label-sm text-label-sm" id="status-success">
+<span class="material-symbols-outlined text-[16px]" data-icon="check_circle">check_circle</span>
+                        CONNECTION VERIFIED
+                    </div>
+<div class="hidden flex items-center gap-2 bg-error/10 text-error px-3 py-1.5 rounded font-label-sm text-label-sm" id="status-error">
+<span class="material-symbols-outlined text-[16px]" data-icon="error">error</span>
+                        CONNECTION FAILED
+                    </div>
+<div class="hidden flex items-center gap-2 bg-surface-variant text-on-surface-variant px-3 py-1.5 rounded font-label-sm text-label-sm" id="status-loading">
+<span class="material-symbols-outlined text-[16px] animate-spin" data-icon="sync">sync</span>
+                        TESTING...
+                    </div>
+</div>
+</div>
+<!-- Card Footer / Actions -->
+<div class="p-xl border-t border-surface-variant bg-surface flex justify-between items-center">
+<button class="text-on-surface-variant font-label-lg text-label-lg hover:text-on-surface transition-colors">
+                    Back
+                </button>
+<button class="bg-primary hover:bg-surface-tint text-on-primary font-label-lg text-label-lg px-xl py-sm rounded-lg transition-colors shadow-sm flex items-center gap-2">
+                    Next Step
+                    <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</main>
+<script>
+        // Toggle Custom Endpoint field visibility
+        const modelSelect = document.getElementById('model-select');
+        const customEndpointField = document.getElementById('custom-endpoint-field');
+
+        modelSelect.addEventListener('change', (e) => {
+            if (e.target.value === 'custom') {
+                customEndpointField.classList.remove('hidden');
+            } else {
+                customEndpointField.classList.add('hidden');
+            }
+        });
+
+        // Toggle API Key visibility
+        const apiKeyInput = document.getElementById('api-key');
+        const toggleBtn = document.getElementById('toggle-visibility');
+        const toggleIcon = toggleBtn.querySelector('.material-symbols-outlined');
+
+        toggleBtn.addEventListener('click', () => {
+            if (apiKeyInput.type === 'password') {
+                apiKeyInput.type = 'text';
+                toggleIcon.textContent = 'visibility_off';
+                toggleIcon.setAttribute('data-icon', 'visibility_off');
+            } else {
+                apiKeyInput.type = 'password';
+                toggleIcon.textContent = 'visibility';
+                toggleIcon.setAttribute('data-icon', 'visibility');
+            }
+        });
+
+        // Mock Test Connection functionality
+        const testBtn = document.getElementById('test-connection-btn');
+        const statusSuccess = document.getElementById('status-success');
+        const statusError = document.getElementById('status-error');
+        const statusLoading = document.getElementById('status-loading');
+
+        testBtn.addEventListener('click', () => {
+            // Reset states
+            statusSuccess.classList.add('hidden');
+            statusError.classList.add('hidden');
+            statusLoading.classList.remove('hidden');
+            testBtn.disabled = true;
+            testBtn.classList.add('opacity-50');
+
+            // Simulate API call
+            setTimeout(() => {
+                statusLoading.classList.add('hidden');
+                testBtn.disabled = false;
+                testBtn.classList.remove('opacity-50');
+                
+                if (apiKeyInput.value.length > 5) {
+                    statusSuccess.classList.remove('hidden');
+                } else {
+                    statusError.classList.remove('hidden');
+                }
+            }, 1500);
+        });
+    </script>
+</body></html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sentience Core - Per-Service Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-container": "#dd3635",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-container": "#ffffff",
+                      "on-secondary-fixed-variant": "#004f56",
+                      "on-primary-fixed-variant": "#004493",
+                      "surface-dim": "#d9dadb",
+                      "surface-container-highest": "#e1e3e4",
+                      "secondary-container": "#8feefc",
+                      "primary-fixed-dim": "#adc7ff",
+                      "surface-container-high": "#e7e8e9",
+                      "tertiary-fixed": "#ffdad6",
+                      "error": "#ba1a1a",
+                      "on-surface": "#191c1d",
+                      "surface": "#f8f9fa",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-container": "#ffffff",
+                      "surface-container": "#edeeef",
+                      "outline-variant": "#c1c6d6",
+                      "tertiary": "#b91a20",
+                      "on-secondary-fixed": "#001f23",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary": "#006972",
+                      "surface-bright": "#f8f9fa",
+                      "primary-fixed": "#d8e2ff",
+                      "primary": "#005bbf",
+                      "primary-container": "#1a73e8",
+                      "on-primary-fixed": "#001a41",
+                      "on-secondary-container": "#006d77",
+                      "on-error": "#ffffff",
+                      "surface-container-low": "#f3f4f5",
+                      "inverse-surface": "#2e3132",
+                      "inverse-primary": "#adc7ff",
+                      "secondary-fixed-dim": "#75d5e2",
+                      "on-tertiary-fixed-variant": "#930010",
+                      "on-tertiary-fixed": "#410003",
+                      "outline": "#727785",
+                      "inverse-on-surface": "#f0f1f2",
+                      "secondary-fixed": "#92f1fe",
+                      "on-secondary": "#ffffff",
+                      "on-background": "#191c1d",
+                      "error-container": "#ffdad6",
+                      "tertiary-fixed-dim": "#ffb3ac",
+                      "surface-tint": "#005bc0",
+                      "background": "#f8f9fa",
+                      "on-primary": "#ffffff",
+                      "surface-variant": "#e1e3e4",
+                      "on-surface-variant": "#414754"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "64px",
+                      "xs": "4px",
+                      "lg": "24px",
+                      "xl": "32px",
+                      "margin-mobile": "16px",
+                      "md": "16px",
+                      "gutter": "16px",
+                      "base": "8px",
+                      "sm": "12px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-sm": ["Inter"],
+                      "label-sm": ["JetBrains Mono"],
+                      "label-lg": ["JetBrains Mono"],
+                      "body-md": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "headline-lg-mobile": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                      "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Custom Blueprint Grid Background */
+        .blueprint-grid {
+            background-color: theme('colors.surface');
+            background-image: 
+                linear-gradient(to right, theme('colors.surface-variant') 1px, transparent 1px),
+                linear-gradient(to bottom, theme('colors.surface-variant') 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Accordion transition */
+        .service-details {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.2s ease-out;
+        }
+        .service-details.expanded {
+            grid-template-rows: 1fr;
+        }
+        .service-details-inner {
+            overflow: hidden;
+        }
+        
+        /* Toggle Switch Styling */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: theme('colors.primary');
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: theme('colors.primary');
+        }
+        .toggle-checkbox:checked + .toggle-label:after {
+            transform: translateX(100%);
+            border-color: white;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="blueprint-grid min-h-screen text-on-surface antialiased font-body-md selection:bg-primary-container selection:text-on-primary-container pb-24 md:pb-0">
+<!-- TopAppBar from JSON -->
+<header class="fixed top-0 w-full z-50 bg-surface border-b border-outline-variant flex justify-between items-center px-margin-mobile py-base w-full max-w-screen-xl mx-auto shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary font-headline-md text-headline-md">memory</span>
+<span class="font-headline-md text-headline-md font-bold text-primary">Sentience Core</span>
+</div>
+<!-- Desktop Navigation Integration (Hidden on Mobile) -->
+<nav class="hidden md:flex gap-1">
+<a class="flex items-center px-4 py-2 rounded-md text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined mr-2 text-lg">home</span> Home
+            </a>
+<a class="flex items-center px-4 py-2 rounded-md text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined mr-2 text-lg">chat</span> Chats
+            </a>
+<a class="flex items-center px-4 py-2 rounded-md text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined mr-2 text-lg">analytics</span> Activity
+            </a>
+<a class="flex items-center px-4 py-2 rounded-md bg-secondary-container text-on-secondary-container font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined icon-fill mr-2 text-lg">settings</span> Settings
+            </a>
+</nav>
+<button class="bg-error hover:bg-on-error-container text-on-error font-label-sm text-label-sm px-4 py-2 rounded-md shadow-md transition-colors flex items-center gap-2 border border-error">
+<span class="material-symbols-outlined text-sm">power_settings_new</span>
+            KILL SWITCH
+        </button>
+</header>
+<!-- Main Content Area -->
+<main class="pt-[88px] px-gutter max-w-4xl mx-auto w-full flex flex-col gap-lg">
+<!-- Page Header -->
+<section class="flex flex-col gap-2 pt-lg">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface tracking-tight">Per-Service Configuration</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                Manage sentience overlay behavior, automation thresholds, and data access permissions across integrated messaging vectors.
+            </p>
+</section>
+<!-- Service List -->
+<section class="flex flex-col gap-4">
+<!-- WhatsApp Card (Active) -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden flex flex-col transition-shadow hover:shadow-md">
+<!-- Header (Clickable) -->
+<button class="w-full text-left px-4 py-4 md:px-6 flex items-center justify-between bg-transparent hover:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset" onclick="toggleService(this)">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-green-500 flex items-center justify-center text-white shadow-inner border border-black/10">
+<span class="material-symbols-outlined">forum</span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">WhatsApp</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">ID: net.whatsapp.core</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-label-sm text-label-sm px-2 py-1 rounded-sm bg-secondary/10 text-secondary border border-secondary/20 uppercase tracking-widest">Active</span>
+<span class="material-symbols-outlined text-on-surface-variant transition-transform duration-200 chevron">expand_more</span>
+</div>
+</button>
+<!-- Expanded Details -->
+<div class="service-details bg-surface-container-low border-t border-outline-variant">
+<div class="service-details-inner p-4 md:p-6 flex flex-col gap-6">
+<!-- Setting: Enable Drafting -->
+<div class="flex items-center justify-between">
+<div class="flex flex-col gap-1 pr-4">
+<span class="font-label-lg text-label-lg text-on-surface">Enable Neural Drafting</span>
+<span class="font-body-sm text-sm text-on-surface-variant">Activate real-time composing overlay within the app interface.</span>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-outline-variant z-10 top-0 left-0 checked:left-6 transition-all duration-200" id="wa-draft" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-variant cursor-pointer border border-outline-variant" for="wa-draft"></label>
+</div>
+</div>
+<!-- Setting: Automation Level -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex flex-col gap-1 pr-4">
+<span class="font-label-lg text-label-lg text-on-surface">Automation Protocol</span>
+<span class="font-body-sm text-sm text-on-surface-variant">Determine AI action authority for inbound vectors.</span>
+</div>
+<div class="flex p-1 bg-surface-container rounded-lg border border-outline-variant shrink-0 w-full md:w-auto">
+<button class="flex-1 md:flex-none px-4 py-2 font-label-sm text-label-sm rounded-md bg-primary-container text-on-primary-container shadow-sm transition-colors text-center">SUGGEST</button>
+<button class="flex-1 md:flex-none px-4 py-2 font-label-sm text-label-sm rounded-md text-on-surface-variant hover:bg-surface-container-highest transition-colors text-center">AUTO-SEND</button>
+</div>
+</div>
+<!-- Setting: Read History -->
+<div class="flex items-center justify-between">
+<div class="flex flex-col gap-1 pr-4">
+<span class="font-label-lg text-label-lg text-on-surface">Contextual Memory Access</span>
+<span class="font-body-sm text-sm text-on-surface-variant">Allow scanning of local database for conversational continuity.</span>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-outline-variant z-10 top-0 left-0 checked:left-6 transition-all duration-200" id="wa-history" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-variant cursor-pointer border border-outline-variant" for="wa-history"></label>
+</div>
+</div>
+</div>
+</div>
+</article>
+<!-- Telegram Card (Active) -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden flex flex-col transition-shadow hover:shadow-md">
+<button class="w-full text-left px-4 py-4 md:px-6 flex items-center justify-between bg-transparent hover:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset" onclick="toggleService(this)">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-blue-500 flex items-center justify-center text-white shadow-inner border border-black/10">
+<span class="material-symbols-outlined">send</span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Telegram</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">ID: org.telegram.messenger</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-label-sm text-label-sm px-2 py-1 rounded-sm bg-secondary/10 text-secondary border border-secondary/20 uppercase tracking-widest">Active</span>
+<span class="material-symbols-outlined text-on-surface-variant transition-transform duration-200 chevron">expand_more</span>
+</div>
+</button>
+<div class="service-details bg-surface-container-low border-t border-outline-variant">
+<div class="service-details-inner p-4 md:p-6 flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<div class="flex flex-col gap-1 pr-4">
+<span class="font-label-lg text-label-lg text-on-surface">Enable Neural Drafting</span>
+<span class="font-body-sm text-sm text-on-surface-variant">Activate real-time composing overlay within the app interface.</span>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-outline-variant z-10 top-0 left-0 checked:left-6 transition-all duration-200" id="tg-draft" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-variant cursor-pointer border border-outline-variant" for="tg-draft"></label>
+</div>
+</div>
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex flex-col gap-1 pr-4">
+<span class="font-label-lg text-label-lg text-on-surface">Automation Protocol</span>
+<span class="font-body-sm text-sm text-on-surface-variant">Determine AI action authority for inbound vectors.</span>
+</div>
+<div class="flex p-1 bg-surface-container rounded-lg border border-outline-variant shrink-0 w-full md:w-auto">
+<button class="flex-1 md:flex-none px-4 py-2 font-label-sm text-label-sm rounded-md text-on-surface-variant hover:bg-surface-container-highest transition-colors text-center">SUGGEST</button>
+<button class="flex-1 md:flex-none px-4 py-2 font-label-sm text-label-sm rounded-md bg-primary-container text-on-primary-container shadow-sm transition-colors text-center">AUTO-SEND</button>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex flex-col gap-1 pr-4">
+<span class="font-label-lg text-label-lg text-on-surface">Contextual Memory Access</span>
+<span class="font-body-sm text-sm text-on-surface-variant">Allow scanning of local database for conversational continuity.</span>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-outline-variant z-10 top-0 left-0 checked:left-6 transition-all duration-200" id="tg-history" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-variant cursor-pointer border border-outline-variant" for="tg-history"></label>
+</div>
+</div>
+</div>
+</div>
+</article>
+<!-- Signal Card (Disabled) -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden flex flex-col transition-shadow hover:shadow-md">
+<button class="w-full text-left px-4 py-4 md:px-6 flex items-center justify-between bg-transparent hover:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset" onclick="toggleService(this)">
+<div class="flex items-center gap-4 opacity-60">
+<div class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center text-white shadow-inner border border-black/10">
+<span class="material-symbols-outlined">chat_bubble</span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Signal</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">ID: org.thoughtcrime.securesms</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-label-sm text-label-sm px-2 py-1 rounded-sm bg-on-surface-variant/10 text-on-surface-variant border border-outline-variant/30 uppercase tracking-widest">Disabled</span>
+<span class="material-symbols-outlined text-on-surface-variant transition-transform duration-200 chevron">expand_more</span>
+</div>
+</button>
+<div class="service-details bg-surface-container-low border-t border-outline-variant">
+<div class="service-details-inner p-4 md:p-6 flex flex-col gap-6 opacity-60 pointer-events-none">
+<div class="flex items-center justify-between">
+<div class="flex flex-col gap-1 pr-4">
+<span class="font-label-lg text-label-lg text-on-surface">Enable Neural Drafting</span>
+<span class="font-body-sm text-sm text-on-surface-variant">Activate real-time composing overlay within the app interface.</span>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-outline-variant z-10 top-0 left-0 checked:left-6 transition-all duration-200" id="sig-draft" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-variant cursor-pointer border border-outline-variant" for="sig-draft"></label>
+</div>
+</div>
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex flex-col gap-1 pr-4">
+<span class="font-label-lg text-label-lg text-on-surface">Automation Protocol</span>
+<span class="font-body-sm text-sm text-on-surface-variant">Determine AI action authority for inbound vectors.</span>
+</div>
+<div class="flex p-1 bg-surface-container rounded-lg border border-outline-variant shrink-0 w-full md:w-auto">
+<button class="flex-1 md:flex-none px-4 py-2 font-label-sm text-label-sm rounded-md bg-surface-container-highest text-on-surface-variant transition-colors text-center">SUGGEST</button>
+<button class="flex-1 md:flex-none px-4 py-2 font-label-sm text-label-sm rounded-md text-on-surface-variant transition-colors text-center">AUTO-SEND</button>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex flex-col gap-1 pr-4">
+<span class="font-label-lg text-label-lg text-on-surface">Contextual Memory Access</span>
+<span class="font-body-sm text-sm text-error">Access restricted by user privacy policy.</span>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-outline-variant z-10 top-0 left-0 checked:left-6 transition-all duration-200" disabled="" id="sig-history" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-variant border border-outline-variant" for="sig-history"></label>
+</div>
+</div>
+</div>
+</div>
+</article>
+</section>
+</main>
+<!-- BottomNavBar from JSON (Hidden on Desktop per rules) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center h-16 px-gutter pb-safe bg-surface-container border-t border-outline-variant shadow-md z-50 rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl">home</span>
+<span class="font-label-sm text-[10px] mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl">chat</span>
+<span class="font-label-sm text-[10px] mt-1">Chats</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl">analytics</span>
+<span class="font-label-sm text-[10px] mt-1">Activity</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 transition-transform duration-200 scale-95" href="#">
+<span class="material-symbols-outlined icon-fill text-2xl">settings</span>
+<span class="font-label-sm text-[10px] mt-1">Settings</span>
+</a>
+</nav>
+<script>
+        function toggleService(button) {
+            const article = button.closest('article');
+            const details = article.querySelector('.service-details');
+            const chevron = button.querySelector('.chevron');
+            
+            // Toggle expanded class
+            const isExpanded = details.classList.contains('expanded');
+            
+            // Close all others (optional accordion behavior, but let's keep it simple and allow multiple open)
+            // document.querySelectorAll('.service-details').forEach(el => {
+            //     el.classList.remove('expanded');
+            //     el.parentElement.querySelector('.chevron').style.transform = 'rotate(0deg)';
+            // });
+
+            if (!isExpanded) {
+                details.classList.add('expanded');
+                chevron.style.transform = 'rotate(180deg)';
+            } else {
+                details.classList.remove('expanded');
+                chevron.style.transform = 'rotate(0deg)';
+            }
+        }
+    </script>
+</body></html>

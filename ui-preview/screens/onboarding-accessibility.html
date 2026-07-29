@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Accessibility Permission - Sentience Core</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#edeeef",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#001f23",
+                        "surface-container-high": "#e7e8e9",
+                        "on-background": "#191c1d",
+                        "primary": "#005bbf",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#dd3635",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#930010",
+                        "on-primary-fixed-variant": "#004493",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#ffffff",
+                        "tertiary": "#b91a20",
+                        "secondary-container": "#8feefc",
+                        "background": "#f8f9fa",
+                        "surface-bright": "#f8f9fa",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#001a41",
+                        "surface-container-low": "#f3f4f5",
+                        "secondary-fixed": "#92f1fe",
+                        "outline-variant": "#c1c6d6",
+                        "primary-fixed-dim": "#adc7ff",
+                        "surface": "#f8f9fa",
+                        "on-tertiary-fixed": "#410003",
+                        "on-tertiary-container": "#ffffff",
+                        "surface-tint": "#005bc0",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface-variant": "#e1e3e4",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#d8e2ff",
+                        "on-surface-variant": "#414754",
+                        "tertiary-fixed": "#ffdad6",
+                        "surface-dim": "#d9dadb",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#004f56",
+                        "on-secondary-container": "#006d77",
+                        "secondary-fixed-dim": "#75d5e2",
+                        "surface-container-highest": "#e1e3e4",
+                        "secondary": "#006972",
+                        "on-surface": "#191c1d",
+                        "outline": "#727785",
+                        "inverse-surface": "#2e3132",
+                        "primary-container": "#1a73e8",
+                        "tertiary-fixed-dim": "#ffb3ac",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#adc7ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "margin-desktop": "64px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "gutter": "16px",
+                        "base": "8px",
+                        "md": "16px",
+                        "margin-mobile": "16px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "label-sm": ["JetBrains Mono"],
+                        "label-lg": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "label-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .bg-grid-blueprint {
+            background-image: linear-gradient(to right, rgba(0, 91, 191, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 91, 191, 0.05) 1px, transparent 1px);
+            background-size: 8px 8px;
+        }
+        .technical-rings {
+            position: relative;
+            width: 96px;
+            height: 96px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .technical-rings::before, .technical-rings::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            border: 1px dashed rgba(0, 91, 191, 0.3);
+        }
+        .technical-rings::before {
+            width: 100%;
+            height: 100%;
+            animation: spin 10s linear infinite;
+        }
+        .technical-rings::after {
+            width: 70%;
+            height: 70%;
+            border-style: dotted;
+            animation: spin 15s linear infinite reverse;
+        }
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md bg-grid-blueprint pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface border-b border-outline-variant flex justify-between items-center px-margin-mobile py-base w-full max-w-screen-xl mx-auto">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="memory">memory</span>
+<span class="font-headline-sm text-headline-sm font-bold text-primary">Sentience Core</span>
+</div>
+<button class="bg-tertiary text-on-tertiary font-label-sm text-label-sm px-4 py-2 rounded-full hover:bg-tertiary-container transition-colors shadow-sm active:opacity-70 transition-opacity duration-150">
+            KILL SWITCH
+        </button>
+</header>
+<!-- Main Content -->
+<main class="flex-grow flex items-center justify-center px-margin-mobile pt-[80px] pb-safe">
+<!-- Onboarding Card (Level 1 Elevation) -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-[0px_2px_4px_rgba(0,0,0,0.05)] w-full max-w-md p-lg flex flex-col items-center text-center relative overflow-hidden">
+<!-- Step Indicator -->
+<div class="absolute top-4 right-4 font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-2 py-1 rounded">
+                SEC_REQ_01
+            </div>
+<!-- Stylized Illustration -->
+<div class="technical-rings my-md text-primary bg-primary-fixed-dim/20 rounded-full">
+<span class="material-symbols-outlined text-4xl" data-icon="visibility" style="font-variation-settings: 'FILL' 1;">visibility</span>
+</div>
+<!-- Content -->
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-md">Contextual Awareness</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-lg px-2">
+                Sentience Core requires Accessibility access to read incoming messages and provide real-time drafting assistance within your favorite messaging apps.
+            </p>
+<!-- Security Note -->
+<div class="bg-surface-container-low rounded-lg p-sm w-full mb-xl flex items-start gap-sm border border-outline-variant/50 text-left">
+<span class="material-symbols-outlined text-secondary text-lg mt-0.5" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+<p class="font-label-lg text-label-lg text-on-surface-variant">
+<strong class="text-secondary">Local Processing Only.</strong> No personal information or message data ever leaves your device. Total isolation guaranteed.
+                </p>
+</div>
+<!-- Actions -->
+<div class="w-full flex flex-col gap-sm">
+<button class="w-full bg-primary text-on-primary font-label-lg text-label-lg py-3 rounded-lg shadow-sm hover:bg-primary-container transition-colors font-semibold">
+                    Grant Accessibility Access
+                </button>
+<button class="w-full bg-transparent text-primary font-label-lg text-label-lg py-3 rounded-lg border border-transparent hover:bg-surface-container-low transition-colors">
+                    Maybe Later
+                </button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container border-t border-outline-variant shadow-md md:hidden block">
+<div class="fixed bottom-0 left-0 w-full flex justify-around items-center h-16 px-gutter pb-safe">
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-colors rounded-lg group">
+<span class="material-symbols-outlined group-active:scale-95 transition-transform duration-200" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-colors rounded-lg group">
+<span class="material-symbols-outlined group-active:scale-95 transition-transform duration-200" data-icon="chat">chat</span>
+<span class="font-label-sm text-label-sm mt-1">Chats</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-colors rounded-lg group">
+<span class="material-symbols-outlined group-active:scale-95 transition-transform duration-200" data-icon="analytics">analytics</span>
+<span class="font-label-sm text-label-sm mt-1">Activity</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 hover:bg-surface-container-highest transition-colors group scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="settings" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-label-sm text-label-sm mt-1 font-bold">Settings</span>
+</button>
+</div>
+</nav>
+</body></html>

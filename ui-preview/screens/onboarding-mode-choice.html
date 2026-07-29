@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sentience Core - Onboarding: Choose Mode</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-bright": "#f8f9fa",
+                      "on-error-container": "#93000a",
+                      "on-secondary": "#ffffff",
+                      "background": "#f8f9fa",
+                      "surface-variant": "#e1e3e4",
+                      "inverse-primary": "#adc7ff",
+                      "on-tertiary-fixed-variant": "#930010",
+                      "on-primary-fixed": "#001a41",
+                      "error-container": "#ffdad6",
+                      "secondary": "#006972",
+                      "on-primary-fixed-variant": "#004493",
+                      "outline": "#727785",
+                      "inverse-surface": "#2e3132",
+                      "tertiary": "#b91a20",
+                      "primary-fixed": "#d8e2ff",
+                      "on-tertiary": "#ffffff",
+                      "surface-tint": "#005bc0",
+                      "surface-container-highest": "#e1e3e4",
+                      "tertiary-fixed-dim": "#ffb3ac",
+                      "inverse-on-surface": "#f0f1f2",
+                      "secondary-container": "#8feefc",
+                      "secondary-fixed-dim": "#75d5e2",
+                      "primary": "#005bbf",
+                      "on-tertiary-container": "#ffffff",
+                      "on-error": "#ffffff",
+                      "on-secondary-fixed": "#001f23",
+                      "secondary-fixed": "#92f1fe",
+                      "on-secondary-fixed-variant": "#004f56",
+                      "on-tertiary-fixed": "#410003",
+                      "on-primary": "#ffffff",
+                      "tertiary-fixed": "#ffdad6",
+                      "surface-container-high": "#e7e8e9",
+                      "surface": "#f8f9fa",
+                      "on-primary-container": "#ffffff",
+                      "primary-container": "#1a73e8",
+                      "surface-container": "#edeeef",
+                      "on-secondary-container": "#006d77",
+                      "surface-container-lowest": "#ffffff",
+                      "on-background": "#191c1d",
+                      "on-surface": "#191c1d",
+                      "on-surface-variant": "#414754",
+                      "outline-variant": "#c1c6d6",
+                      "error": "#ba1a1a",
+                      "surface-container-low": "#f3f4f5",
+                      "primary-fixed-dim": "#adc7ff",
+                      "tertiary-container": "#dd3635",
+                      "surface-dim": "#d9dadb"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "sm": "12px",
+                      "xs": "4px",
+                      "xl": "32px",
+                      "base": "8px",
+                      "margin-mobile": "16px",
+                      "md": "16px",
+                      "lg": "24px",
+                      "margin-desktop": "64px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "body-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "label-sm": ["JetBrains Mono"],
+                      "headline-sm": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "label-lg": ["JetBrains Mono"],
+                      "headline-md": ["Inter"],
+                      "headline-lg-mobile": ["Inter"]
+              },
+              "fontSize": {
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        /* Blueprint grid background */
+        .bg-blueprint {
+            background-color: theme('colors.surface-bright');
+            background-image: linear-gradient(theme('colors.surface-variant') 1px, transparent 1px),
+                              linear-gradient(90deg, theme('colors.surface-variant') 1px, transparent 1px);
+            background-size: 24px 24px;
+            background-position: center center;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-blueprint text-on-surface min-h-screen flex flex-col font-body-lg">
+<!-- Top App Bar (Modified for onboarding flow, hidden nav elements) -->
+<header class="fixed top-0 w-full z-50 bg-surface border-b border-outline-variant flex justify-between items-center px-margin-mobile py-base h-16 max-w-screen-xl mx-auto shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">memory</span>
+<span class="font-headline-md text-headline-md font-bold text-primary tracking-tight">Sentience Core</span>
+</div>
+<div class="flex items-center">
+<!-- Stepper badge moved here for better mobile visibility in header -->
+<span class="font-label-sm text-label-sm bg-surface-container-high text-on-surface-variant px-3 py-1 rounded-full border border-outline-variant uppercase">Step 6 of 6</span>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow flex items-center justify-center p-margin-mobile pt-24 pb-32 md:pb-24 max-w-screen-xl mx-auto w-full">
+<!-- Onboarding Card (Level 1 Elevation) -->
+<div class="bg-surface border border-outline-variant rounded-xl shadow-[0_2px_4px_rgba(0,0,0,0.05)] w-full max-w-lg p-lg md:p-xl flex flex-col gap-lg relative overflow-hidden">
+<!-- Header Section -->
+<div class="flex flex-col gap-base">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface">Choose Your Mode</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Decide how Sentience Core should handle your replies. You can change this anytime in settings.</p>
+</div>
+<!-- Options Grid -->
+<div class="flex flex-col gap-md" id="mode-selection">
+<!-- Option 1: SUGGEST (Selected) -->
+<label class="cursor-pointer relative flex items-start p-md border-2 border-primary bg-primary-fixed rounded-lg transition-all duration-200 hover:bg-surface-container-high group" id="option-suggest">
+<input checked="" class="sr-only" name="reply_mode" type="radio" value="suggest"/>
+<div class="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-on-primary mr-md shrink-0">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<div class="flex flex-col gap-xs flex-grow">
+<div class="flex justify-between items-center w-full">
+<span class="font-headline-sm text-headline-sm text-on-surface">SUGGEST <span class="font-label-sm text-label-sm text-primary ml-2 uppercase">(Recommended)</span></span>
+<span class="material-symbols-outlined text-primary" id="icon-suggest" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Drafts appear in a floating overlay. You review, edit, and tap to send. Safest way to use AI.</p>
+</div>
+</label>
+<!-- Option 2: AUTO-SEND (Unselected) -->
+<label class="cursor-pointer relative flex items-start p-md border border-outline-variant bg-surface rounded-lg transition-all duration-200 hover:bg-surface-container group" id="option-auto">
+<input class="sr-only" name="reply_mode" type="radio" value="auto"/>
+<div class="flex items-center justify-center w-10 h-10 rounded-full bg-surface-variant text-on-surface-variant mr-md shrink-0 group-hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">bolt</span>
+</div>
+<div class="flex flex-col gap-xs flex-grow">
+<div class="flex flex-wrap items-center gap-2 mb-1">
+<span class="font-headline-sm text-headline-sm text-on-surface">AUTO-SEND</span>
+<span class="font-label-sm text-label-sm bg-error-container text-on-error-container px-2 py-0.5 rounded-sm uppercase tracking-wider">Advanced</span>
+<span class="font-label-sm text-label-sm bg-surface-container-highest text-on-surface-variant px-2 py-0.5 rounded-sm flex items-center gap-1 border border-outline-variant">
+<span class="material-symbols-outlined text-[14px]">shield</span> Requires Allowlist
+                             </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">AI sends replies automatically based on your allowlist. Higher risk of detection or awkward phrasing.</p>
+</div>
+<!-- Hidden checked icon for unselected state -->
+<span class="material-symbols-outlined text-primary hidden absolute right-md top-md" id="icon-auto" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</label>
+</div>
+<!-- Footer Actions -->
+<div class="flex justify-between items-center mt-md pt-md border-t border-outline-variant">
+<button class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container px-4 py-2 rounded-lg transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+                     Back
+                 </button>
+<button class="font-label-lg text-label-lg bg-primary text-on-primary hover:bg-surface-tint px-6 py-3 rounded-lg shadow-sm transition-all active:scale-95 flex items-center gap-2">
+                     Finish Setup
+                     <span class="material-symbols-outlined text-[18px]">check</span>
+</button>
+</div>
+</div>
+</main>
+<script>
+        // Simple vanilla JS to handle visual selection state
+        document.addEventListener('DOMContentLoaded', () => {
+            const optionSuggest = document.getElementById('option-suggest');
+            const optionAuto = document.getElementById('option-auto');
+            const iconSuggest = document.getElementById('icon-suggest');
+            const iconAuto = document.getElementById('icon-auto');
+            const radios = document.querySelectorAll('input[name="reply_mode"]');
+
+            function updateSelection() {
+                const selectedValue = document.querySelector('input[name="reply_mode"]:checked').value;
+                
+                if (selectedValue === 'suggest') {
+                    // Set Suggest as active
+                    optionSuggest.className = 'cursor-pointer relative flex items-start p-md border-2 border-primary bg-primary-fixed rounded-lg transition-all duration-200 hover:bg-primary-fixed-dim group';
+                    iconSuggest.classList.remove('hidden');
+                    optionSuggest.querySelector('.rounded-full').className = 'flex items-center justify-center w-10 h-10 rounded-full bg-primary text-on-primary mr-md shrink-0';
+                    
+                    // Set Auto as inactive
+                    optionAuto.className = 'cursor-pointer relative flex items-start p-md border border-outline-variant bg-surface rounded-lg transition-all duration-200 hover:bg-surface-container group';
+                    iconAuto.classList.add('hidden');
+                    optionAuto.querySelector('.rounded-full').className = 'flex items-center justify-center w-10 h-10 rounded-full bg-surface-variant text-on-surface-variant mr-md shrink-0 group-hover:bg-surface-container-high transition-colors';
+
+                } else {
+                    // Set Auto as active
+                    optionAuto.className = 'cursor-pointer relative flex items-start p-md border-2 border-primary bg-primary-fixed rounded-lg transition-all duration-200 hover:bg-primary-fixed-dim group';
+                    iconAuto.classList.remove('hidden');
+                    optionAuto.querySelector('.rounded-full').className = 'flex items-center justify-center w-10 h-10 rounded-full bg-primary text-on-primary mr-md shrink-0';
+                    
+                    // Set Suggest as inactive
+                    optionSuggest.className = 'cursor-pointer relative flex items-start p-md border border-outline-variant bg-surface rounded-lg transition-all duration-200 hover:bg-surface-container group';
+                    iconSuggest.classList.add('hidden');
+                    optionSuggest.querySelector('.rounded-full').className = 'flex items-center justify-center w-10 h-10 rounded-full bg-surface-variant text-on-surface-variant mr-md shrink-0 group-hover:bg-surface-container-high transition-colors';
+                }
+            }
+
+            radios.forEach(radio => {
+                radio.addEventListener('change', updateSelection);
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>App UI Preview — Stitch Screens</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #111318;
+    color: #e3e3e8;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+  aside {
+    width: 260px;
+    min-width: 260px;
+    background: #1a1d24;
+    border-right: 1px solid #2a2e38;
+    overflow-y: auto;
+    padding: 16px 0;
+  }
+  aside h1 {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0 16px 12px;
+    color: #9aa0ae;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .group-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 14px 16px 6px;
+  }
+  aside button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    color: #c9cdd6;
+    font-size: 13.5px;
+    padding: 9px 16px;
+    cursor: pointer;
+    border-left: 3px solid transparent;
+  }
+  aside button:hover { background: #232733; }
+  aside button.active {
+    background: #262b3a;
+    border-left-color: #7c9aff;
+    color: #fff;
+    font-weight: 600;
+  }
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 24px;
+    overflow: auto;
+  }
+  .screen-title { font-size: 15px; font-weight: 600; color: #9aa0ae; }
+  .phone {
+    width: 390px;
+    height: 844px;
+    max-height: calc(100vh - 90px);
+    background: #000;
+    border-radius: 44px;
+    padding: 10px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.6), 0 0 0 2px #333;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .phone iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 34px;
+    background: #fff;
+  }
+  .hint { font-size: 12px; color: #6b7280; }
+</style>
+</head>
+<body>
+  <aside>
+    <h1>Sentience Core — 24 screens</h1>
+    <div id="nav"></div>
+  </aside>
+  <main>
+    <div class="screen-title" id="title"></div>
+    <div class="phone"><iframe id="frame" src=""></iframe></div>
+    <div class="hint">Scroll inside the phone to see the full screen · ←/→ arrow keys to switch</div>
+  </main>
+<script>
+  const groups = [
+    { label: "Launch & Onboarding", screens: [
+      ["Splash / Permission Gate", "screens/splash-gate.html"],
+      ["Welcome", "screens/onboarding-welcome.html"],
+      ["Notification Access", "screens/onboarding-notification-access.html"],
+      ["Accessibility Grant", "screens/onboarding-accessibility.html"],
+      ["Battery Optimization", "screens/onboarding-battery.html"],
+      ["LLM Setup", "screens/llm-setup.html"],
+      ["Mode Choice", "screens/onboarding-mode-choice.html"],
+    ]},
+    { label: "Main App", screens: [
+      ["Home / Dashboard", "screens/home-dashboard.html"],
+      ["Conversations List", "screens/conversations-list.html"],
+      ["Conversation Detail", "screens/conversation-detail.html"],
+      ["Draft Overlay (floating)", "screens/draft-overlay.html"],
+      ["Activity Log", "screens/activity-log.html"],
+      ["Activity Log (refined)", "screens/activity-log-refinement.html"],
+    ]},
+    { label: "Settings", screens: [
+      ["Settings Hub", "screens/settings-hub.html"],
+      ["F1 Reply Mode & Behavior", "screens/reply-mode-behavior.html"],
+      ["F2 Per-Service Settings", "screens/per-service-settings.html"],
+      ["F3 LLM & Persona Settings", "screens/llm-persona-settings.html"],
+      ["F3+ Persona Lab", "screens/persona-lab.html"],
+      ["F4 Guardrails & Safety", "screens/guardrails-safety.html"],
+      ["F5 Allowlist Manager", "screens/allowlist-manager.html"],
+      ["F6 Privacy & Data Retention", "screens/privacy-data-retention.html"],
+      ["F7 Diagnostics / SelectorMap", "screens/diagnostics-selectormap.html"],
+      ["F8 Blockers & Status Report", "screens/blockers-status.html"],
+    ]},
+    { label: "Safety", screens: [
+      ["G Kill Switch", "screens/kill-switch.html"],
+    ]},
+  ];
+  const flat = groups.flatMap(g => g.screens);
+  const nav = document.getElementById("nav");
+  let current = 0;
+  groups.forEach(g => {
+    const lbl = document.createElement("div");
+    lbl.className = "group-label";
+    lbl.textContent = g.label;
+    nav.appendChild(lbl);
+    g.screens.forEach(s => {
+      const i = flat.indexOf(s);
+      const b = document.createElement("button");
+      b.textContent = s[0];
+      b.onclick = () => show(i);
+      b.dataset.idx = i;
+      nav.appendChild(b);
+    });
+  });
+  function show(i) {
+    current = i;
+    document.getElementById("frame").src = flat[i][1];
+    document.getElementById("title").textContent = flat[i][0];
+    document.querySelectorAll("aside button").forEach(b =>
+      b.classList.toggle("active", +b.dataset.idx === i));
+  }
+  document.addEventListener("keydown", e => {
+    if (e.key === "ArrowRight") show((current + 1) % flat.length);
+    if (e.key === "ArrowLeft") show((current - 1 + flat.length) % flat.length);
+  });
+  show(0);
+</script>
+</body>
+</html>

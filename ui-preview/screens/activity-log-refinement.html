@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Activity Log - Sentience Core</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "primary-container": "#1a73e8",
+                        "secondary-fixed-dim": "#75d5e2",
+                        "primary-fixed-dim": "#adc7ff",
+                        "surface-container": "#edeeef",
+                        "primary": "#005bbf",
+                        "surface-container-high": "#e7e8e9",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#b91a20",
+                        "tertiary-container": "#dd3635",
+                        "tertiary-fixed-dim": "#ffb3ac",
+                        "surface-dim": "#d9dadb",
+                        "inverse-on-surface": "#f0f1f2",
+                        "secondary": "#006972",
+                        "surface": "#f8f9fa",
+                        "on-error-container": "#93000a",
+                        "outline": "#727785",
+                        "on-secondary-fixed": "#001f23",
+                        "secondary-fixed": "#92f1fe",
+                        "on-surface": "#191c1d",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f8f9fa",
+                        "on-primary-container": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#2e3132",
+                        "on-tertiary-fixed-variant": "#930010",
+                        "outline-variant": "#c1c6d6",
+                        "inverse-primary": "#adc7ff",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-tint": "#005bc0",
+                        "tertiary-fixed": "#ffdad6",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-variant": "#e1e3e4",
+                        "on-secondary-container": "#006d77",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#410003",
+                        "on-background": "#191c1d",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed": "#001a41",
+                        "on-tertiary-container": "#ffffff",
+                        "secondary-container": "#8feefc",
+                        "on-surface-variant": "#414754",
+                        "on-secondary-fixed-variant": "#004f56",
+                        "background": "#f8f9fa",
+                        "primary-fixed": "#d8e2ff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#004493"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "margin-mobile": "16px",
+                        "xl": "32px",
+                        "margin-desktop": "64px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-lg": ["JetBrains Mono"],
+                        "headline-lg": ["Inter"],
+                        "label-sm": ["JetBrains Mono"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "label-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            /* Blueprint grid */
+            background-image: 
+                linear-gradient(theme('colors.outline-variant') 1px, transparent 1px),
+                linear-gradient(90deg, theme('colors.outline-variant') 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-position: -1px -1px;
+        }
+        /* Add a semi-transparent overlay to make text readable */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: theme('colors.background');
+            opacity: 0.95;
+            z-index: -1;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .filter-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .filter-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out, opacity 0.2s ease-out;
+            opacity: 0;
+        }
+        .expandable-content.expanded {
+            max-height: 200px; /* Arbitrary large value */
+            opacity: 1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col pt-[72px] pb-[80px]">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline">
+<div class="flex justify-between items-center px-margin-mobile py-base w-full max-w-screen-xl mx-auto">
+<div class="flex items-center gap-sm">
+<span aria-hidden="true" class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">memory</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Sentience Core</h1>
+</div>
+<button class="bg-error text-on-error px-sm py-xs rounded-full font-label-lg text-label-lg shadow-md hover:opacity-90 active:scale-95 transition-all flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+                KILL SWITCH
+            </button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-screen-xl mx-auto px-margin-mobile md:px-margin-desktop py-lg flex flex-col gap-lg">
+<!-- Header Section -->
+<div class="flex flex-col gap-xs">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Audit Log</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Real-time trace of AI processing and network I/O.</p>
+</div>
+<!-- Filter Chips -->
+<div class="flex overflow-x-auto filter-scroll gap-sm py-xs">
+<button class="px-md py-xs rounded-full border border-primary text-primary bg-primary-fixed font-label-sm text-label-sm whitespace-nowrap transition-colors">ALL</button>
+<button class="px-md py-xs rounded-full border border-outline text-on-surface-variant hover:bg-surface-variant font-label-sm text-label-sm whitespace-nowrap transition-colors">RECEIVED</button>
+<button class="px-md py-xs rounded-full border border-outline text-on-surface-variant hover:bg-surface-variant font-label-sm text-label-sm whitespace-nowrap transition-colors">SUGGESTED</button>
+<button class="px-md py-xs rounded-full border border-outline text-on-surface-variant hover:bg-surface-variant font-label-sm text-label-sm whitespace-nowrap transition-colors">INSERTED</button>
+<button class="px-md py-xs rounded-full border border-outline text-on-surface-variant hover:bg-surface-variant font-label-sm text-label-sm whitespace-nowrap transition-colors">AUTO_SENT</button>
+<button class="px-md py-xs rounded-full border border-outline text-on-surface-variant hover:bg-surface-variant font-label-sm text-label-sm whitespace-nowrap transition-colors">BLOCKED</button>
+</div>
+<!-- Timeline Log -->
+<div class="flex flex-col relative before:absolute before:inset-y-0 before:left-[19px] before:w-[2px] before:bg-outline-variant before:z-0">
+<!-- Log Entry 1 -->
+<div class="relative z-10 flex gap-md mb-md group">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center border-2 border-surface flex-shrink-0 mt-1">
+<span class="material-symbols-outlined text-on-secondary-container text-[20px]">input</span>
+</div>
+<div class="flex-grow bg-surface-container-lowest rounded-lg border border-outline-variant shadow-[0_2px_4px_rgba(0,0,0,0.05)] overflow-hidden cursor-pointer" onclick="toggleExpand(this)">
+<div class="p-sm flex justify-between items-start hover:bg-surface-container-low transition-colors">
+<div class="flex flex-col gap-xs">
+<div class="flex items-center gap-sm">
+<span class="bg-secondary-container text-on-secondary-container px-xs py-[2px] rounded font-label-sm text-label-sm uppercase">RECEIVED</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">12:45 PM</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Sarah (Tinder)</h3>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant transition-transform duration-200 expand-icon">expand_more</span>
+</div>
+<div class="expandable-content bg-surface px-sm py-sm border-t border-outline-variant flex flex-col gap-sm">
+<div class="flex gap-sm items-start">
+<span class="material-symbols-outlined text-outline text-[16px] mt-1">format_quote</span>
+<p class="font-body-md text-body-md text-on-surface italic">"Hey, are we still on for later?"</p>
+</div>
+<div class="bg-surface-container p-xs rounded font-label-sm text-label-sm text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">info</span>
+                            Payload parsed. Triggering generation engine.
+                        </div>
+</div>
+</div>
+</div>
+<!-- Log Entry 2 -->
+<div class="relative z-10 flex gap-md mb-md group">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center border-2 border-surface flex-shrink-0 mt-1">
+<span class="material-symbols-outlined text-on-primary-container text-[20px]">auto_awesome</span>
+</div>
+<div class="flex-grow bg-surface-container-lowest rounded-lg border border-outline-variant shadow-[0_2px_4px_rgba(0,0,0,0.05)] overflow-hidden cursor-pointer" onclick="toggleExpand(this)">
+<div class="p-sm flex justify-between items-start hover:bg-surface-container-low transition-colors">
+<div class="flex flex-col gap-xs">
+<div class="flex items-center gap-sm">
+<span class="bg-primary-fixed text-on-primary-fixed px-xs py-[2px] rounded font-label-sm text-label-sm uppercase">SUGGESTED</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">12:45 PM</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">2 drafts generated</h3>
+<span class="font-label-sm text-label-sm text-primary">Persona: Professional Assist</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant transition-transform duration-200 expand-icon">expand_more</span>
+</div>
+<div class="expandable-content bg-surface px-sm py-sm border-t border-outline-variant flex flex-col gap-sm">
+<div class="flex flex-col gap-xs pl-sm border-l-2 border-primary-fixed">
+<p class="font-body-md text-body-md text-on-surface">1. "Yeah, definitely! Looking forward to it." (Confide: High)</p>
+<p class="font-body-md text-body-md text-on-surface">2. "Might be a bit late, but I'll be there." (Confide: Medium)</p>
+</div>
+<div class="bg-surface-container p-xs rounded font-label-sm text-label-sm text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">analytics</span>
+                            Model confidence: 92%. Awaiting user selection.
+                        </div>
+</div>
+</div>
+</div>
+<!-- Log Entry 3 -->
+<div class="relative z-10 flex gap-md mb-md group">
+<div class="w-10 h-10 rounded-full bg-[#10b981] flex items-center justify-center border-2 border-surface flex-shrink-0 mt-1">
+<span class="material-symbols-outlined text-white text-[20px]">send</span>
+</div>
+<div class="flex-grow bg-surface-container-lowest rounded-lg border border-outline-variant shadow-[0_2px_4px_rgba(0,0,0,0.05)] overflow-hidden cursor-pointer" onclick="toggleExpand(this)">
+<div class="p-sm flex justify-between items-start hover:bg-surface-container-low transition-colors">
+<div class="flex flex-col gap-xs">
+<div class="flex items-center gap-sm">
+<span class="bg-[#10b981]/20 text-[#047857] px-xs py-[2px] rounded font-label-sm text-label-sm uppercase font-bold">AUTO_SENT</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">11:30 AM</span>
+<span class="material-symbols-outlined text-[#10b981] text-[16px]">check_circle</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Mike (WhatsApp)</h3>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant transition-transform duration-200 expand-icon">expand_more</span>
+</div>
+<div class="expandable-content bg-surface px-sm py-sm border-t border-outline-variant flex flex-col gap-sm">
+<div class="flex gap-sm items-start">
+<span class="material-symbols-outlined text-outline text-[16px] mt-1">outbound</span>
+<p class="font-body-md text-body-md text-on-surface font-medium">"Great!"</p>
+</div>
+<div class="bg-surface-container p-xs rounded font-label-sm text-label-sm text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">policy</span>
+                            Rule matched: Auto-reply to Mike (Safe list). Confidence &gt; 95%.
+                        </div>
+</div>
+</div>
+</div>
+<!-- Log Entry 4 -->
+<div class="relative z-10 flex gap-md group">
+<div class="w-10 h-10 rounded-full bg-error flex items-center justify-center border-2 border-surface flex-shrink-0 mt-1">
+<span class="material-symbols-outlined text-on-error text-[20px]">block</span>
+</div>
+<div class="flex-grow bg-surface-container-lowest rounded-lg border border-error/50 shadow-[0_2px_4px_rgba(0,0,0,0.05)] overflow-hidden cursor-pointer" onclick="toggleExpand(this)">
+<div class="p-sm flex justify-between items-start hover:bg-surface-container-low transition-colors">
+<div class="flex flex-col gap-xs">
+<div class="flex items-center gap-sm">
+<span class="bg-error-container text-on-error-container px-xs py-[2px] rounded font-label-sm text-label-sm uppercase">BLOCKED</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">10:15 AM</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Unknown (WhatsApp)</h3>
+<span class="font-label-sm text-label-sm text-error">Reason: Non-Allowlisted Contact</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant transition-transform duration-200 expand-icon">expand_more</span>
+</div>
+<div class="expandable-content bg-surface px-sm py-sm border-t border-error/30 flex flex-col gap-sm">
+<div class="flex gap-sm items-start">
+<span class="material-symbols-outlined text-error text-[16px] mt-1">gpp_bad</span>
+<p class="font-body-md text-body-md text-on-surface">Not on allowlist.</p>
+</div>
+<div class="bg-error-container/50 p-xs rounded font-label-sm text-label-sm text-on-error-container flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">shield</span>
+                            Strict mode enabled. Dropped payload from unknown sender to prevent context pollution.
+                        </div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container dark:bg-surface-container-lowest border-t border-outline-variant shadow-md md:hidden">
+<div class="fixed bottom-0 left-0 w-full flex justify-around items-center h-16 px-gutter pb-safe">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</a>
+<!-- Chats -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">chat</span>
+<span class="font-label-sm text-label-sm mt-1">Chats</span>
+</a>
+<!-- Activity (Active) -->
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-fixed-dim text-on-secondary-container dark:text-on-secondary-fixed rounded-full px-4 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-variant scale-95 transition-transform duration-200 shadow-sm" href="#">
+<span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-label-sm text-label-sm mt-1 font-semibold">Activity</span>
+</a>
+<!-- Settings -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">settings</span>
+<span class="font-label-sm text-label-sm mt-1">Settings</span>
+</a>
+</div>
+</nav>
+<script>
+        function toggleExpand(element) {
+            const content = element.querySelector('.expandable-content');
+            const icon = element.querySelector('.expand-icon');
+            
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                icon.style.transform = 'rotate(0deg)';
+                content.style.paddingTop = '0px';
+                content.style.paddingBottom = '0px';
+            } else {
+                content.classList.add('expanded');
+                icon.style.transform = 'rotate(180deg)';
+                content.style.paddingTop = '12px'; // p-sm
+                content.style.paddingBottom = '12px'; // p-sm
+            }
+        }
+    </script>
+</body></html>

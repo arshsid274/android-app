@@ -1,0 +1,201 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Floating Draft Overlay</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#005bc0",
+                        "outline-variant": "#c1c6d6",
+                        "on-secondary-fixed-variant": "#004f56",
+                        "tertiary-container": "#dd3635",
+                        "on-secondary-container": "#006d77",
+                        "surface-dim": "#d9dadb",
+                        "on-secondary": "#ffffff",
+                        "primary": "#005bbf",
+                        "on-primary-fixed-variant": "#004493",
+                        "secondary": "#006972",
+                        "secondary-container": "#8feefc",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-container-high": "#e7e8e9",
+                        "on-tertiary-container": "#ffffff",
+                        "inverse-surface": "#2e3132",
+                        "on-tertiary-fixed-variant": "#930010",
+                        "surface": "#f8f9fa",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e1e3e4",
+                        "secondary-fixed": "#92f1fe",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface-variant": "#e1e3e4",
+                        "on-background": "#191c1d",
+                        "on-surface-variant": "#414754",
+                        "on-primary-fixed": "#001a41",
+                        "on-secondary-fixed": "#001f23",
+                        "error-container": "#ffdad6",
+                        "outline": "#727785",
+                        "tertiary-fixed-dim": "#ffb3ac",
+                        "background": "#f8f9fa",
+                        "on-surface": "#191c1d",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#adc7ff",
+                        "tertiary-fixed": "#ffdad6",
+                        "surface-container": "#edeeef",
+                        "surface-bright": "#f8f9fa",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#adc7ff",
+                        "secondary-fixed-dim": "#75d5e2",
+                        "on-tertiary-fixed": "#410003",
+                        "primary-container": "#1a73e8",
+                        "tertiary": "#b91a20",
+                        "primary-fixed": "#d8e2ff",
+                        "on-primary-container": "#ffffff",
+                        "on-tertiary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "32px",
+                        "sm": "12px",
+                        "md": "16px",
+                        "gutter": "16px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "64px",
+                        "lg": "24px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "label-sm": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-lg": ["JetBrains Mono"],
+                        "headline-sm": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .blueprint-grid {
+            background-size: 24px 24px;
+            background-image: 
+                linear-gradient(to right, rgba(0, 91, 191, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 91, 191, 0.05) 1px, transparent 1px);
+        }
+        .mock-app-bg {
+            background-color: #fce4e4; /* Soft red for mock dating app */
+            background-image: radial-gradient(circle at 50% 50%, #fdf2f2 0%, #fce4e4 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background h-screen w-screen overflow-hidden flex flex-col justify-center items-center relative font-body-md text-body-md">
+<!-- Mock Background App Context (Blurred) -->
+<div class="absolute inset-0 z-0 mock-app-bg flex flex-col items-center justify-start pt-24 px-4 overflow-hidden blur-sm pointer-events-none opacity-60">
+<!-- Mock App Header -->
+<div class="w-full max-w-sm flex justify-between items-center mb-8">
+<div class="w-8 h-8 rounded-full bg-white opacity-50"></div>
+<div class="w-24 h-6 rounded-full bg-white opacity-50"></div>
+<div class="w-8 h-8 rounded-full bg-white opacity-50"></div>
+</div>
+<!-- Mock App Card Stack -->
+<div class="w-full max-w-sm aspect-[3/4] bg-white rounded-xl shadow-lg relative mb-6">
+<div class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/50 to-transparent rounded-b-xl flex items-end p-4">
+<div class="w-3/4 h-6 bg-white/80 rounded mb-2"></div>
+</div>
+</div>
+<!-- Mock App Controls -->
+<div class="w-full max-w-sm flex justify-center gap-6">
+<div class="w-16 h-16 rounded-full bg-white opacity-80 shadow-md"></div>
+<div class="w-16 h-16 rounded-full bg-white opacity-80 shadow-md"></div>
+<div class="w-16 h-16 rounded-full bg-white opacity-80 shadow-md"></div>
+</div>
+</div>
+<!-- Floating UI Area (Lower Third) -->
+<div class="relative z-10 w-full max-w-sm h-full flex flex-col justify-end pb-24 px-4 pointer-events-none">
+<!-- Expanded Card State -->
+<div class="pointer-events-auto w-full bg-surface-container-lowest rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-outline-variant overflow-hidden mb-6 blueprint-grid relative"><div class="w-full flex justify-center pt-2 pb-1"><div class="w-8 h-1 bg-outline-variant rounded-full opacity-50"></div></div>
+<!-- Header / Status Indicator -->
+<div class="flex items-center justify-between px-4 py-3 border-b border-surface-variant bg-surface-container-low/80 backdrop-blur-sm">
+<div class="flex items-center gap-2"><span class="w-3.5 h-3.5 rounded-full bg-secondary animate-pulse shadow-[0_0_8px_rgba(0,105,114,0.5)]"></span><div class="flex flex-col"><span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">SUGGEST MODE</span><span class="text-[10px] font-label-sm text-on-surface-variant opacity-60 uppercase tracking-tighter">Status: Active</span></div></div>
+<div class="flex gap-1 text-on-surface-variant"><button aria-label="Minimize" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-surface-variant transition-colors"><span class="material-symbols-outlined text-[18px]">remove</span></button>
+<button aria-label="Regenerate" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+</button>
+<button aria-label="Dismiss" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+<!-- Draft Chips -->
+<div class="p-4 flex flex-col gap-3">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">DRAFT REPLIES DETECTED</p>
+<button class="w-full text-left bg-primary-100/50 hover:bg-primary-100 border border-primary-fixed-dim rounded-lg p-3 transition-colors group relative overflow-hidden flex items-start gap-3 active:scale-[0.98] transition-transform hover:shadow-md">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary group-hover:bg-primary-container transition-colors"></div>
+<span class="material-symbols-outlined text-primary mt-0.5 text-[20px]">smart_toy</span>
+<span class="font-body-md text-body-md text-on-surface">"That sounds like an amazing trip! Did you get to try any local street food while you were there?"</span>
+</button>
+<button class="w-full text-left bg-surface hover:bg-surface-container-high border border-outline-variant rounded-lg p-3 transition-colors flex items-start gap-3 active:scale-[0.98] transition-transform hover:shadow-md">
+<span class="material-symbols-outlined text-on-surface-variant mt-0.5 text-[20px]">chat_bubble</span>
+<span class="font-body-md text-body-md text-on-surface">"I completely agree. The sequel was visually stunning but the plot felt a bit rushed, right?"</span>
+</button>
+<button class="w-full text-left bg-surface hover:bg-surface-container-high border border-outline-variant rounded-lg p-3 transition-colors flex items-start gap-3 active:scale-[0.98] transition-transform hover:shadow-md">
+<span class="material-symbols-outlined text-on-surface-variant mt-0.5 text-[20px]">emoji_objects</span>
+<span class="font-body-md text-body-md text-on-surface">"Honestly, I'm just looking for someone who appreciates a good coffee and terrible puns."</span>
+</button>
+</div>
+<!-- Action Footer -->
+<div class="px-4 py-3 bg-surface-container-low border-t border-surface-variant flex justify-end py-4">
+<button class="font-label-lg text-label-lg text-primary flex items-center gap-2 hover:bg-primary-fixed/50 px-3 py-1.5 rounded-md transition-colors">
+                    VIEW FULL THREAD <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Floating Action Bubble (Draggable handle mock) -->
+<div class="pointer-events-auto absolute bottom-24 right-4 flex items-center justify-center">
+<!-- Connection line visual (optional) -->
+<div class="absolute bottom-full right-6 w-[2px] h-12 bg-primary/20 -z-10 hidden"></div>
+<button class="w-14 h-14 bg-surface-container-lowest rounded-full shadow-[0_4px_20px_rgb(0,0,0,0.15)] border-2 border-primary flex items-center justify-center hover:scale-105 transition-transform cursor-grab active:cursor-grabbing relative group z-20">
+<span class="material-symbols-outlined text-primary text-[28px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">memory</span>
+<!-- Active badge -->
+<span class="absolute top-0 right-0 w-3.5 h-3.5 bg-tertiary rounded-full border-2 border-surface-container-lowest animate-pulse"></span>
+<!-- Hover Tooltip -->
+<div class="absolute right-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap bg-inverse-surface text-inverse-on-surface font-label-sm text-label-sm px-2 py-1 rounded shadow-md pointer-events-none">
+                    Sentience Core Active
+                </div>
+</button>
+</div>
+</div>
+
+
+</body></html>

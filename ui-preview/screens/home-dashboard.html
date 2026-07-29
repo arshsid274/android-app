@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sentience Core - Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "primary-container": "#1a73e8",
+                        "secondary-fixed-dim": "#75d5e2",
+                        "primary-fixed-dim": "#adc7ff",
+                        "surface-container": "#edeeef",
+                        "primary": "#005bbf",
+                        "surface-container-high": "#e7e8e9",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#b91a20",
+                        "tertiary-container": "#dd3635",
+                        "tertiary-fixed-dim": "#ffb3ac",
+                        "surface-dim": "#d9dadb",
+                        "inverse-on-surface": "#f0f1f2",
+                        "secondary": "#006972",
+                        "surface": "#f8f9fa",
+                        "on-error-container": "#93000a",
+                        "outline": "#727785",
+                        "on-secondary-fixed": "#001f23",
+                        "secondary-fixed": "#92f1fe",
+                        "on-surface": "#191c1d",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f8f9fa",
+                        "on-primary-container": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#2e3132",
+                        "on-tertiary-fixed-variant": "#930010",
+                        "outline-variant": "#c1c6d6",
+                        "inverse-primary": "#adc7ff",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-tint": "#005bc0",
+                        "tertiary-fixed": "#ffdad6",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-variant": "#e1e3e4",
+                        "on-secondary-container": "#006d77",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#410003",
+                        "on-background": "#191c1d",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed": "#001a41",
+                        "on-tertiary-container": "#ffffff",
+                        "secondary-container": "#8feefc",
+                        "on-surface-variant": "#414754",
+                        "on-secondary-fixed-variant": "#004f56",
+                        "background": "#f8f9fa",
+                        "primary-fixed": "#d8e2ff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#004493"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "margin-mobile": "16px",
+                        "xl": "32px",
+                        "margin-desktop": "64px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-lg": ["JetBrains Mono"],
+                        "headline-lg": ["Inter"],
+                        "label-sm": ["JetBrains Mono"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "label-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        /* Hide scrollbar for clean UI */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="antialiased min-h-screen flex flex-col pt-[72px] pb-[80px] md:pb-0">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline transition-opacity duration-150 active:opacity-70">
+<div class="flex justify-between items-center px-margin-mobile py-base w-full max-w-screen-xl mx-auto h-[72px]">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" data-icon="memory" style="font-variation-settings: 'FILL' 1;">memory</span>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Sentience Core</span>
+</div>
+<button class="bg-error text-on-error px-md py-sm rounded-full font-label-lg text-label-lg hover:bg-tertiary-container transition-colors flex items-center gap-xs shadow-md">
+<span class="material-symbols-outlined text-[18px]">power_settings_new</span>
+                KILL SWITCH
+            </button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-screen-xl mx-auto px-margin-mobile md:px-margin-desktop py-lg flex flex-col gap-lg">
+<!-- Status Hero -->
+<section class="bg-surface-container rounded-xl p-lg border border-outline-variant shadow-[0_2px_4px_rgba(0,0,0,0.05)] relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none"></div>
+<div class="flex flex-col gap-base relative z-10">
+<span class="font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wider">System Status</span>
+<div class="flex items-center gap-md">
+<div class="relative flex h-4 w-4">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-4 w-4 bg-secondary"></span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface">SYSTEM ACTIVE</h1>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md mt-xs">All local processes running nominally. Intercepting communications seamlessly.</p>
+</div>
+</section>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-md">
+<!-- Service Pills (Left Column on Desktop) -->
+<section class="md:col-span-8 flex flex-col gap-md">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Monitored Services</h2>
+<div class="flex flex-wrap gap-sm">
+<!-- WhatsApp (Connected) -->
+<div class="flex items-center gap-sm bg-surface-container-high px-md py-sm rounded-full border border-outline-variant">
+<img class="w-6 h-6 rounded-full object-cover" data-alt="A small, stylized, flat icon representing a generic chat bubble in green, fitting a corporate UI, highly legible against a light gray background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDf1Tij68GsFQXR20Wgv9iKVe81_P_3WoA4XXPaVJQNGeQ4Jzxpobv0pIFNZ1mmOWggoNT59KB7jFflNsQL807eytNQqUDYMdMhlVl7v_DLboVH145RC08oMsO419r40RqB6NC3tZY6Lgz3LF-SqO8ZyB1GJPI_Z9KImOgtLj8wyVsw-Vdh2rmUznpSp2TA3Qw40X0mivJpXKrGOQ5m-uT703QaRoOWgGIvwTsz8SgSlghYRGFonb8p"/>
+<span class="font-label-lg text-label-lg text-on-surface">WhatsApp</span>
+<div class="bg-[#006972]/10 text-secondary px-sm py-xs rounded-full flex items-center gap-xs ml-auto">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span class="font-label-sm text-label-sm">Connected</span>
+</div>
+</div>
+<!-- Tinder (Connected) -->
+<div class="flex items-center gap-sm bg-surface-container-high px-md py-sm rounded-full border border-outline-variant">
+<img class="w-6 h-6 rounded-full object-cover" data-alt="A small, stylized, flat icon representing a generic flame or match symbol in red/orange, fitting a corporate UI, highly legible against a light gray background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqfcF1nZeDynf9ZrkLbAfQrxT1ftgYh7HXs_9o3eUd9Oru4fYjf81uW3ohzRSWFLWkJWY2PjxIxrW_4hXLLyP-5vYmlpI4iDaLa_l1H4xjos77Y-Mqtl2pE7JuT4m7BT3f4xUfV3ZYL_QXkhiTI_-S3dCE8ybwseUGFEerXRb_tpOcm87uPEZU7cS3eU9VkIzpoQE-0jNv4SY7PKaJ7FSJZeNWv4dxxysqtuJWnb4NkNI0-flzUVVd"/>
+<span class="font-label-lg text-label-lg text-on-surface">Tinder</span>
+<div class="bg-[#006972]/10 text-secondary px-sm py-xs rounded-full flex items-center gap-xs ml-auto">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span class="font-label-sm text-label-sm">Connected</span>
+</div>
+</div>
+<!-- Hinge (Permission Missing) -->
+<div class="flex items-center gap-sm bg-surface-container-high px-md py-sm rounded-full border border-outline-variant opacity-80">
+<img class="w-6 h-6 rounded-full object-cover grayscale" data-alt="A small, stylized, flat icon representing a generic H letter or modern abstract shape in purple/black, fitting a corporate UI, highly legible against a light gray background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8uG37yPDgFQxQ6FFYmAMg0Jb7VAcFG1pzuXn2mBso35Zk2qYFhVhED3nZ9oSdE2RHwMSRf3V72-VeTFhmxfwdWqPNQgS97v1ad-G31-_AwtnpyE5px9HudGR48__u-qreRzMAXJnlMwobQEZJoYWJwzfr5R49XbPNtTRdQdPH4yjyVV8FSpNk9CCQ6e7wX71nnXfbqsluoG7dDtu-0IYKM-u3f8YOYQ26oGroIvyPoPU4lEINUAbi"/>
+<span class="font-label-lg text-label-lg text-on-surface">Hinge</span>
+<div class="bg-[#b91a20]/10 text-tertiary px-sm py-xs rounded-full flex items-center gap-xs ml-auto">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+<span class="font-label-sm text-label-sm">Permission Missing</span>
+</div>
+</div>
+</div>
+<!-- Recent Activity List -->
+<div class="mt-lg flex flex-col gap-sm">
+<div class="flex justify-between items-end mb-xs">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Event Log</h2>
+<span class="font-label-sm text-label-sm text-primary uppercase cursor-pointer hover:underline">View All</span>
+</div>
+<div class="bg-surface rounded-lg border border-outline-variant overflow-hidden flex flex-col">
+<!-- Event 1 -->
+<div class="flex items-start gap-md p-md border-b border-outline-variant hover:bg-surface-container-low transition-colors">
+<div class="bg-primary-container/10 p-sm rounded-full text-primary-container mt-xs">
+<span class="material-symbols-outlined text-[20px]">mark_chat_unread</span>
+</div>
+<div class="flex-grow">
+<p class="font-body-md text-body-md text-on-surface">Message received from <span class="font-bold">Sarah</span></p>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">10:42 AM • WhatsApp</span>
+</div>
+</div>
+<!-- Event 2 -->
+<div class="flex items-start gap-md p-md border-b border-outline-variant hover:bg-surface-container-low transition-colors">
+<div class="bg-secondary/10 p-sm rounded-full text-secondary mt-xs">
+<span class="material-symbols-outlined text-[20px]">edit_document</span>
+</div>
+<div class="flex-grow">
+<p class="font-body-md text-body-md text-on-surface">Draft generated: Contextual response formulated</p>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">10:43 AM • Core Logic</span>
+</div>
+</div>
+<!-- Event 3 -->
+<div class="flex items-start gap-md p-md hover:bg-surface-container-low transition-colors">
+<div class="bg-primary/10 p-sm rounded-full text-primary mt-xs">
+<span class="material-symbols-outlined text-[20px]">send</span>
+</div>
+<div class="flex-grow">
+<p class="font-body-md text-body-md text-on-surface">Auto-sent reply</p>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">10:44 AM • WhatsApp</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Guardrails (Right Column on Desktop) -->
+<section class="md:col-span-4 flex flex-col gap-md">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Guardrails</h2>
+<div class="bg-surface-container rounded-xl p-md border border-outline-variant flex flex-col gap-md shadow-[0_2px_4px_rgba(0,0,0,0.05)]">
+<!-- Meter 1 -->
+<div>
+<div class="flex justify-between items-center mb-xs">
+<span class="font-label-lg text-label-lg text-on-surface">Rate Limit</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">4/20 msgs</span>
+</div>
+<div class="w-full bg-outline-variant/30 rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 20%"></div>
+</div>
+</div>
+<!-- Meter 2 -->
+<div class="flex justify-between items-center py-xs border-t border-outline-variant">
+<span class="font-label-lg text-label-lg text-on-surface">Human Cadence</span>
+<div class="bg-secondary/10 text-secondary px-sm py-xs rounded-sm font-label-sm text-label-sm font-mono border border-secondary/20">ON</div>
+</div>
+<!-- Meter 3 -->
+<div class="flex justify-between items-center py-xs border-t border-outline-variant">
+<span class="font-label-lg text-label-lg text-on-surface">A11y Check</span>
+<div class="bg-secondary/10 text-secondary px-sm py-xs rounded-sm font-label-sm text-label-sm font-mono border border-secondary/20">OK</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container dark:bg-surface-container-lowest border-t border-outline-variant shadow-md transition-transform duration-200">
+<div class="fixed bottom-0 left-0 w-full flex justify-around items-center h-16 px-gutter pb-safe">
+<!-- Active Tab: Home -->
+<div class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-fixed-dim text-on-secondary-container dark:text-on-secondary-fixed rounded-full px-4 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-variant cursor-pointer scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined text-[24px]" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-sm text-label-sm mt-xs">Home</span>
+</div>
+<!-- Inactive Tabs -->
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-variant cursor-pointer">
+<span class="material-symbols-outlined text-[24px]" data-icon="chat">chat</span>
+<span class="font-label-sm text-label-sm mt-xs">Chats</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-variant cursor-pointer">
+<span class="material-symbols-outlined text-[24px]" data-icon="analytics">analytics</span>
+<span class="font-label-sm text-label-sm mt-xs">Activity</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-variant cursor-pointer">
+<span class="material-symbols-outlined text-[24px]" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm mt-xs">Settings</span>
+</div>
+</div>
+</nav>
+<!-- Desktop Side Nav Overlay (Hidden on Mobile) -->
+<nav class="hidden md:flex fixed left-0 top-[72px] h-[calc(100vh-72px)] w-[240px] bg-surface border-r border-outline-variant flex-col py-lg px-md gap-sm">
+<div class="bg-secondary-container text-on-secondary-container px-md py-sm rounded-lg flex items-center gap-sm cursor-pointer border border-secondary-container hover:bg-secondary-container/80 transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-lg text-label-lg font-bold">Home</span>
+</div>
+<div class="text-on-surface-variant px-md py-sm rounded-lg flex items-center gap-sm cursor-pointer hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">chat</span>
+<span class="font-label-lg text-label-lg">Chats</span>
+</div>
+<div class="text-on-surface-variant px-md py-sm rounded-lg flex items-center gap-sm cursor-pointer hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-lg text-label-lg">Activity</span>
+</div>
+<div class="mt-auto text-on-surface-variant px-md py-sm rounded-lg flex items-center gap-sm cursor-pointer hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-lg text-label-lg">Settings</span>
+</div>
+</nav>
+<!-- Adjust main content margin for desktop sidenav -->
+<style>
+        @media (min-width: 768px) {
+            main {
+                margin-left: 240px;
+                max-width: calc(100vw - 240px);
+            }
+        }
+    </style>
+</body></html>

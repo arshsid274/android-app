@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Cue</string>
+    <string name="notif_listener_label">Cue message reader</string>
+    <string name="a11y_service_label">Cue chat assistant</string>
+    <string name="a11y_service_description">Cue reads the currently open dating-app chat so it can draft replies you tap to send. It can be turned off at any time and never sends without you unless you explicitly enable auto-send.</string>
+</resources>

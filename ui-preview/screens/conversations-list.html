@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sentience Core - Chats</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "error": "#ba1a1a",
+                        "primary-container": "#1a73e8",
+                        "secondary-fixed-dim": "#75d5e2",
+                        "primary-fixed-dim": "#adc7ff",
+                        "surface-container": "#edeeef",
+                        "primary": "#005bbf",
+                        "surface-container-high": "#e7e8e9",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#b91a20",
+                        "tertiary-container": "#dd3635",
+                        "tertiary-fixed-dim": "#ffb3ac",
+                        "surface-dim": "#d9dadb",
+                        "inverse-on-surface": "#f0f1f2",
+                        "secondary": "#006972",
+                        "surface": "#f8f9fa",
+                        "on-error-container": "#93000a",
+                        "outline": "#727785",
+                        "on-secondary-fixed": "#001f23",
+                        "secondary-fixed": "#92f1fe",
+                        "on-surface": "#191c1d",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f8f9fa",
+                        "on-primary-container": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#2e3132",
+                        "on-tertiary-fixed-variant": "#930010",
+                        "outline-variant": "#c1c6d6",
+                        "inverse-primary": "#adc7ff",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-tint": "#005bc0",
+                        "tertiary-fixed": "#ffdad6",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-variant": "#e1e3e4",
+                        "on-secondary-container": "#006d77",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#410003",
+                        "on-background": "#191c1d",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed": "#001a41",
+                        "on-tertiary-container": "#ffffff",
+                        "secondary-container": "#8feefc",
+                        "on-surface-variant": "#414754",
+                        "on-secondary-fixed-variant": "#004f56",
+                        "background": "#f8f9fa",
+                        "primary-fixed": "#d8e2ff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#004493"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "gutter": "16px",
+                        "margin-mobile": "16px",
+                        "xl": "32px",
+                        "margin-desktop": "64px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xs": "4px"
+                    },
+                    fontFamily: {
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-lg": ["JetBrains Mono"],
+                        "headline-lg": ["Inter"],
+                        "label-sm": ["JetBrains Mono"],
+                        "body-lg": ["Inter"]
+                    },
+                    fontSize: {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "label-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline">
+<div class="flex justify-between items-center px-margin-mobile py-base w-full max-w-screen-xl mx-auto">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">memory</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim tracking-tight">Sentience Core</h1>
+</div>
+<button class="bg-error hover:bg-on-error-container text-on-error font-label-lg text-label-lg px-md py-xs rounded-full shadow-sm transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">warning</span>
+                KILL SWITCH
+            </button>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow pt-[72px] pb-[96px] w-full max-w-screen-xl mx-auto flex flex-col md:flex-row">
+<!-- Sidebar / Tools Layout (Desktop) -->
+<aside class="hidden md:flex flex-col w-64 border-r border-outline-variant px-margin-mobile py-lg gap-lg">
+<div class="flex flex-col gap-sm">
+<h2 class="font-label-lg text-label-lg text-on-surface-variant uppercase tracking-widest">Active Services</h2>
+<div class="flex items-center justify-between p-sm rounded-lg bg-surface-container-low border border-outline-variant">
+<div class="flex items-center gap-sm"><span class="material-symbols-outlined text-secondary">forum</span> <span class="font-label-sm text-label-sm text-on-surface">WhatsApp</span></div>
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+</div>
+<div class="flex items-center justify-between p-sm rounded-lg bg-surface-container-low border border-outline-variant">
+<div class="flex items-center gap-sm"><span class="material-symbols-outlined text-tertiary">favorite</span> <span class="font-label-sm text-label-sm text-on-surface">Tinder</span></div>
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+</div>
+<div class="flex items-center justify-between p-sm rounded-lg bg-surface-container-low border border-outline-variant">
+<div class="flex items-center gap-sm"><span class="material-symbols-outlined text-primary">diversity_1</span> <span class="font-label-sm text-label-sm text-on-surface">Hinge</span></div>
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+</div>
+</div>
+<div class="mt-auto p-md rounded-lg bg-surface-container border border-outline-variant flex flex-col gap-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant">System Status</span>
+<div class="flex items-center gap-xs text-secondary font-label-sm text-label-sm bg-secondary/10 w-fit px-2 py-0.5 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+                     Monitoring Active
+                 </div>
+</div>
+</aside>
+<!-- Primary Canvas -->
+<div class="flex-1 flex flex-col w-full">
+<!-- Search Bar -->
+<div class="px-margin-mobile py-md w-full sticky top-[60px] bg-background/95 backdrop-blur-sm z-40">
+<div class="relative w-full max-w-2xl mx-auto">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container hover:bg-surface-container-high focus:bg-surface-container-highest border-none rounded-full py-sm pl-12 pr-md font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant transition-colors focus:ring-2 focus:ring-primary focus:outline-none" placeholder="Search intercepted conversations..." type="text"/>
+</div>
+</div>
+<!-- Filter Bar -->
+<div class="px-margin-mobile pb-md flex gap-sm overflow-x-auto no-scrollbar max-w-2xl mx-auto w-full">
+<button class="flex-shrink-0 bg-primary text-on-primary font-label-lg text-label-lg px-md py-1.5 rounded-full hover:bg-surface-tint transition-colors shadow-sm">All</button>
+<button class="flex-shrink-0 bg-surface-container text-on-surface hover:bg-surface-container-high font-label-lg text-label-lg px-md py-1.5 rounded-full border border-outline-variant transition-colors">WhatsApp</button>
+<button class="flex-shrink-0 bg-surface-container text-on-surface hover:bg-surface-container-high font-label-lg text-label-lg px-md py-1.5 rounded-full border border-outline-variant transition-colors">Tinder</button>
+<button class="flex-shrink-0 bg-surface-container text-on-surface hover:bg-surface-container-high font-label-lg text-label-lg px-md py-1.5 rounded-full border border-outline-variant transition-colors">Hinge</button>
+</div>
+<!-- Conversation List (Cards) -->
+<div class="px-margin-mobile flex flex-col gap-sm max-w-2xl mx-auto w-full pb-xl">
+<!-- Row 1: Sarah (Tinder) -->
+<div class="bg-surface border border-outline-variant rounded-xl p-md flex gap-md items-start hover:bg-surface-container-low transition-colors cursor-pointer group shadow-sm hover:shadow-md relative overflow-hidden">
+<!-- Left Accent Line -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-tertiary opacity-70"></div>
+<div class="relative flex-shrink-0 mt-1">
+<img class="w-12 h-12 rounded-full object-cover border-2 border-surface bg-surface-container" data-alt="Close up portrait photograph of a young woman with light brown hair, smiling subtly, soft natural lighting, modern high-end dating app profile style picture, shallow depth of field, vibrant colors, pristine white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzjI2atBUMV8H9AC9wZFlN1RsrKANzjEotrDa27TgbGnB4qwsAgfL3OPvoduiHO4juKxDmo3JyXEPdBQLFDLtl96b5P8WsNVnkKnPu_hIrOHQeNVgeDYiQ4Bka6OS-PVOHpROb9jM6TcLqA0ePIiYwbCAaZ-jjhMMd2IVk3wIRvGOtAYZf7t0FqbHKp_tgXZFEBVX9K2gBLjaXjeR5w9ohhELx8pJVNykyFZQfoY7mxZahz_cJhtuF"/>
+<div class="absolute -bottom-1 -right-1 bg-surface rounded-full p-[2px]">
+<div class="bg-tertiary text-on-tertiary rounded-full w-5 h-5 flex items-center justify-center">
+<span class="material-symbols-outlined text-[12px] icon-fill">favorite</span>
+</div>
+</div>
+</div>
+<div class="flex-1 min-w-0 flex flex-col gap-xs">
+<div class="flex justify-between items-baseline gap-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Sarah</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant whitespace-nowrap">10m ago</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-[14px]">call_received</span>
+<p class="font-body-md text-body-md text-on-surface-variant truncate">Hey, how's your day?</p>
+</div>
+<div class="flex flex-wrap gap-2 mt-1">
+<span class="bg-primary-container text-on-primary-container font-label-sm text-label-sm px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px]">edit_document</span> Draft Pending
+                            </span>
+</div>
+</div>
+</div>
+<!-- Row 2: Mike (WhatsApp) -->
+<div class="bg-surface border border-outline-variant rounded-xl p-md flex gap-md items-start hover:bg-surface-container-low transition-colors cursor-pointer group shadow-sm hover:shadow-md relative overflow-hidden">
+<!-- Left Accent Line -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary opacity-70"></div>
+<div class="relative flex-shrink-0 mt-1">
+<img class="w-12 h-12 rounded-full object-cover border-2 border-surface bg-surface-container" data-alt="Professional headshot of a man in his thirties with short dark hair and a neat beard, wearing a casual grey t-shirt, bright daylight, modern corporate aesthetic, clean composition, neutral background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAdhO2M3JXW3-C0Uxoh-NKwhvqha6b971zDWaIZniVj2XwXPTb_nILXiMRAnkEl-6t7YZE-QhatG6WD5DhykK1ioDYoIEolHqJK1yVbC13wYz8UlZ8a-e9oQEZszdAB9JsyYhfrXou46dpaEIzvb_JYgRqj7l1YPZfTKlUEiTinLWMOOW2qAW5cN8lJQjYyotIUuP3NfzrlzhFFwMxJb7lMLuo3UtYvZY7VxdUA_3mI-NfblZ2QUKY"/>
+<div class="absolute -bottom-1 -right-1 bg-surface rounded-full p-[2px]">
+<div class="bg-secondary text-on-secondary rounded-full w-5 h-5 flex items-center justify-center">
+<span class="material-symbols-outlined text-[12px] icon-fill">forum</span>
+</div>
+</div>
+</div>
+<div class="flex-1 min-w-0 flex flex-col gap-xs">
+<div class="flex justify-between items-baseline gap-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Mike</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant whitespace-nowrap">1h ago</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-on-surface-variant text-[14px]">call_made</span>
+<p class="font-body-md text-body-md text-on-surface-variant truncate">See you then!</p>
+</div>
+<div class="flex flex-wrap gap-2 mt-1">
+<span class="bg-secondary-container text-on-secondary-container font-label-sm text-label-sm px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px]">verified_user</span> Allowlisted
+                            </span>
+</div>
+</div>
+</div>
+<!-- Row 3: Alex (Hinge) -->
+<div class="bg-surface border border-outline-variant rounded-xl p-md flex gap-md items-start hover:bg-surface-container-low transition-colors cursor-pointer group shadow-sm hover:shadow-md relative overflow-hidden opacity-90">
+<!-- Left Accent Line -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary opacity-50"></div>
+<div class="relative flex-shrink-0 mt-1">
+<img class="w-12 h-12 rounded-full object-cover border-2 border-surface bg-surface-container opacity-90" data-alt="Candid, slightly blurred profile photo of a person wearing sunglasses at an outdoor cafe, sunny day, shallow depth of field, warm light-mode aesthetic, lifestyle photography style typical for dating apps." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfDjFQd0uHsbSgRft8BmtetuTBj8z0Xwvns7TgnmHndG4K0nApn4bgrwzTUk8dtc7_7c1O5141X1br_dyE9sinFq-F7BkwDLK55Eo-cFx1CVzAp1GuDKndGu7zChKzTczWP92i4yy6lYFJXPB3S4BiRZzmmB0WSjwBFpmc45t4VvL44YU4x2FS-kawApIF1SsA81ukzVCZUjKQHf5JxewhvsM_OWuTuJ4BD2qwYXl5-kvPBphfSD3V"/>
+<div class="absolute -bottom-1 -right-1 bg-surface rounded-full p-[2px]">
+<div class="bg-primary text-on-primary rounded-full w-5 h-5 flex items-center justify-center">
+<span class="material-symbols-outlined text-[12px] icon-fill">diversity_1</span>
+</div>
+</div>
+</div>
+<div class="flex-1 min-w-0 flex flex-col gap-xs">
+<div class="flex justify-between items-baseline gap-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Alex</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant whitespace-nowrap">3h ago</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-[14px]">call_received</span>
+<p class="font-body-md text-body-md text-on-surface-variant truncate">I love that place.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center h-16 px-gutter pb-safe bg-surface-container dark:bg-surface-container-lowest border-t border-outline-variant z-50 rounded-t-xl shadow-md">
+<!-- Home (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</a>
+<!-- Chats (Active) -->
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-fixed-dim text-on-secondary-container dark:text-on-secondary-fixed rounded-full px-4 py-1 scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined text-[24px] icon-fill">chat</span>
+<span class="font-label-sm text-label-sm mt-1">Chats</span>
+</a>
+<!-- Activity (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined text-[24px]">analytics</span>
+<span class="font-label-sm text-label-sm mt-1">Activity</span>
+</a>
+<!-- Settings (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+<span class="font-label-sm text-label-sm mt-1">Settings</span>
+</a>
+</nav>
+</body></html>

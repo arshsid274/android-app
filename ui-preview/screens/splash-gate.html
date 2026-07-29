@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sentience Core - Splash</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-background": "#191c1d",
+                      "on-secondary-fixed-variant": "#004f56",
+                      "on-secondary-container": "#006d77",
+                      "surface-container": "#edeeef",
+                      "surface-bright": "#f8f9fa",
+                      "primary-fixed-dim": "#adc7ff",
+                      "tertiary": "#b91a20",
+                      "surface": "#f8f9fa",
+                      "secondary-container": "#8feefc",
+                      "outline": "#727785",
+                      "primary-fixed": "#d8e2ff",
+                      "primary-container": "#1a73e8",
+                      "secondary": "#006972",
+                      "surface-dim": "#d9dadb",
+                      "on-primary-fixed-variant": "#004493",
+                      "secondary-fixed": "#92f1fe",
+                      "primary": "#005bbf",
+                      "on-surface-variant": "#414754",
+                      "on-surface": "#191c1d",
+                      "error-container": "#ffdad6",
+                      "surface-tint": "#005bc0",
+                      "inverse-surface": "#2e3132",
+                      "outline-variant": "#c1c6d6",
+                      "error": "#ba1a1a",
+                      "inverse-primary": "#adc7ff",
+                      "on-primary-container": "#ffffff",
+                      "surface-container-low": "#f3f4f5",
+                      "surface-variant": "#e1e3e4",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary-fixed": "#ffdad6",
+                      "surface-container-highest": "#e1e3e4",
+                      "on-tertiary-container": "#ffffff",
+                      "inverse-on-surface": "#f0f1f2",
+                      "tertiary-fixed-dim": "#ffb3ac",
+                      "tertiary-container": "#dd3635",
+                      "on-primary-fixed": "#001a41",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-fixed-variant": "#930010",
+                      "on-secondary": "#ffffff",
+                      "background": "#f8f9fa",
+                      "surface-container-high": "#e7e8e9",
+                      "secondary-fixed-dim": "#75d5e2",
+                      "on-tertiary-fixed": "#410003",
+                      "on-secondary-fixed": "#001f23",
+                      "on-error-container": "#93000a",
+                      "on-tertiary": "#ffffff",
+                      "on-error": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "32px",
+                      "gutter": "16px",
+                      "margin-mobile": "16px",
+                      "xs": "4px",
+                      "margin-desktop": "64px",
+                      "md": "16px",
+                      "lg": "24px",
+                      "sm": "12px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "label-sm": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-lg-mobile": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-sm": [
+                              "Inter"
+                      ],
+                      "label-lg": [
+                              "JetBrains Mono"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "label-sm": [
+                              "11px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.5px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-lg": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.1px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        /* Ambient Blueprint Grid Pattern */
+        .blueprint-bg {
+            background-color: #f8f9fa;
+            background-image: 
+                linear-gradient(to right, rgba(0, 91, 191, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 91, 191, 0.05) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="blueprint-bg text-on-background min-h-screen flex flex-col font-sans antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- Shared Component: TopAppBar -->
+<header class="bg-surface dark:bg-on-background text-primary dark:text-primary-fixed-dim font-headline-sm text-headline-sm uppercase tracking-wider docked full-width top-0 border-b border-outline-variant dark:border-outline flat no shadows flex justify-between items-center w-full px-margin-mobile py-base md:px-margin-desktop sticky z-50">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined font-label-lg text-label-lg font-black text-primary dark:text-primary-fixed-dim tracking-tighter" data-icon="terminal">terminal</span>
+<span class="font-label-lg text-label-lg font-black text-primary dark:text-primary-fixed-dim tracking-tighter">SENTIENCE CORE</span>
+</div>
+<button class="bg-tertiary text-on-tertiary font-label-sm text-label-sm uppercase px-md py-xs rounded hover:bg-error-container hover:text-on-error-container transition-colors duration-150 active:scale-95 flex items-center gap-xs font-bold shadow-md">
+<span class="material-symbols-outlined" data-icon="power_settings_new" style="font-size: 16px;">power_settings_new</span>
+            KILL SWITCH
+        </button>
+</header>
+<main class="flex-1 flex flex-col max-w-4xl mx-auto w-full px-margin-mobile md:px-margin-desktop py-xl gap-xl">
+<!-- Top Half: Branding -->
+<section class="flex flex-col items-center justify-center pt-xl pb-lg text-center gap-sm">
+<div class="w-24 h-24 rounded-2xl bg-surface-container border border-outline-variant flex items-center justify-center mb-md shadow-sm">
+<span class="material-symbols-outlined text-primary text-6xl" data-icon="memory" style="font-size: 64px; font-variation-settings: 'FILL' 1;">memory</span>
+</div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Sentience Core</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md mx-auto">Securing your AI-native communications.</p>
+</section>
+<!-- Bottom Half: System Permissions Gate -->
+<section class="flex flex-col gap-md flex-1">
+<div class="bg-surface border border-outline-variant rounded-xl p-md md:p-lg shadow-sm">
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-lg border-b border-surface-container-high pb-xs">System Permissions</h2>
+<ul class="flex flex-col gap-lg">
+<!-- Permission 1: Notifications -->
+<li class="flex items-start justify-between gap-md group">
+<div class="flex items-start gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center shrink-0 group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-primary-container" data-icon="notifications_active">notifications_active</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface">Notifications</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Real-time alerts for AI draft generation.</span>
+</div>
+</div>
+<div class="shrink-0 pt-1">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</li>
+<!-- Permission 2: Accessibility -->
+<li class="flex items-start justify-between gap-md group">
+<div class="flex items-start gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center shrink-0 group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-primary-container" data-icon="accessibility_new">accessibility_new</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface flex items-center gap-xs">
+                                    Accessibility
+                                    <span class="inline-block px-2 py-0.5 bg-error-container text-on-error-container font-label-sm text-label-sm rounded uppercase tracking-wider">Required</span>
+</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Required for context-aware drafting.</span>
+</div>
+</div>
+<div class="shrink-0 pt-1">
+<span class="material-symbols-outlined text-outline" data-icon="lock">lock</span>
+</div>
+</li>
+<!-- Permission 3: Background Data -->
+<li class="flex items-start justify-between gap-md group">
+<div class="flex items-start gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center shrink-0 group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-primary-container" data-icon="sync">sync</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface">Background Data</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Enables background scraping and analysis.</span>
+</div>
+</div>
+<div class="shrink-0 pt-1">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</li>
+</ul>
+</div>
+<div class="mt-auto pt-lg flex justify-center pb-xl">
+<button class="bg-primary text-on-primary w-full max-w-sm py-md rounded-lg font-label-lg text-label-lg uppercase tracking-wider hover:bg-primary-container transition-colors shadow-md active:scale-95 duration-150 flex items-center justify-center gap-xs group">
+                    INITIALIZE CORE
+                    <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</section>
+</main>
+</body></html>

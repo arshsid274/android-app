@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Allowlist Manager - Sentience Core</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-container": "#ffffff",
+                    "on-secondary-container": "#006d77",
+                    "on-background": "#191c1d",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-bright": "#f8f9fa",
+                    "inverse-surface": "#2e3132",
+                    "tertiary-fixed-dim": "#ffb3ac",
+                    "surface-container-low": "#f3f4f5",
+                    "on-surface-variant": "#414754",
+                    "on-secondary-fixed": "#001f23",
+                    "surface-container": "#edeeef",
+                    "surface": "#f8f9fa",
+                    "on-secondary": "#ffffff",
+                    "tertiary": "#b91a20",
+                    "outline": "#727785",
+                    "on-primary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "secondary-fixed-dim": "#75d5e2",
+                    "tertiary-fixed": "#ffdad6",
+                    "tertiary-container": "#dd3635",
+                    "outline-variant": "#c1c6d6",
+                    "on-error-container": "#93000a",
+                    "primary": "#005bbf",
+                    "secondary-fixed": "#92f1fe",
+                    "on-tertiary-fixed-variant": "#930010",
+                    "on-tertiary-fixed": "#410003",
+                    "background": "#f8f9fa",
+                    "surface-container-high": "#e7e8e9",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#191c1d",
+                    "inverse-primary": "#adc7ff",
+                    "on-tertiary-container": "#ffffff",
+                    "secondary-container": "#8feefc",
+                    "on-primary-fixed": "#001a41",
+                    "surface-dim": "#d9dadb",
+                    "primary-fixed-dim": "#adc7ff",
+                    "on-secondary-fixed-variant": "#004f56",
+                    "inverse-on-surface": "#f0f1f2",
+                    "primary-fixed": "#d8e2ff",
+                    "on-primary-fixed-variant": "#004493",
+                    "error": "#ba1a1a",
+                    "surface-variant": "#e1e3e4",
+                    "surface-tint": "#005bc0",
+                    "surface-container-highest": "#e1e3e4",
+                    "primary-container": "#1a73e8",
+                    "error-container": "#ffdad6",
+                    "secondary": "#006972"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "margin-desktop": "64px",
+                    "base": "8px",
+                    "margin-mobile": "16px",
+                    "lg": "24px",
+                    "gutter": "16px",
+                    "xl": "32px",
+                    "md": "16px",
+                    "sm": "12px"
+            },
+            "fontFamily": {
+                    "label-lg": [
+                            "JetBrains Mono"
+                    ],
+                    "headline-md": [
+                            "Inter"
+                    ],
+                    "headline-lg": [
+                            "Inter"
+                    ],
+                    "headline-lg-mobile": [
+                            "Inter"
+                    ],
+                    "body-md": [
+                            "Inter"
+                    ],
+                    "label-sm": [
+                            "JetBrains Mono"
+                    ],
+                    "headline-sm": [
+                            "Inter"
+                    ],
+                    "body-lg": [
+                            "Inter"
+                    ]
+            },
+            "fontSize": {
+                    "label-lg": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "letterSpacing": "0.1px",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "28px",
+                            {
+                                    "lineHeight": "36px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "label-sm": [
+                            "11px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.5px",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "headline-sm": [
+                            "20px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "body-lg": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+          },
+        }
+      }
+    </script>
+<style>
+        .blueprint-grid {
+            background-image: linear-gradient(to right, rgba(0, 91, 191, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(0, 91, 191, 0.05) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background antialiased min-h-screen blueprint-grid relative">
+<!-- Top App Bar - Intentionally modifying leading icon to 'arrow_back' for navigation intent, but keeping structure -->
+<header class="bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline fixed top-0 w-full z-50">
+<div class="flex justify-between items-center px-margin-mobile py-base w-full max-w-screen-xl mx-auto h-16">
+<div class="flex items-center gap-sm cursor-pointer hover:bg-surface-container-high dark:hover:bg-surface-variant p-2 rounded-full transition-colors active:opacity-70">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" data-icon="arrow_back" data-weight="fill" style="font-variation-settings: 'FILL' 1;">arrow_back</span>
+</div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim tracking-tight">Allowlist Manager</h1>
+<div class="flex items-center">
+<button class="bg-tertiary text-on-tertiary px-4 py-2 rounded font-label-lg text-label-lg uppercase tracking-wider hover:bg-on-tertiary-fixed-variant transition-colors active:opacity-70 shadow-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-on-tertiary" data-icon="warning" data-weight="fill" style="font-variation-settings: 'FILL' 1; font-size: 16px;">warning</span>
+                     KILL SWITCH
+                 </button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="pt-24 pb-safe max-w-screen-xl mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-lg relative">
+<!-- Controls Column -->
+<div class="md:col-span-12 flex flex-col gap-md">
+<!-- Search & Filters Container -->
+<div class="bg-surface-container-lowest p-md rounded-xl border border-outline-variant shadow-sm flex flex-col gap-md z-10 relative">
+<!-- Search Input -->
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-sm top-1/2 transform -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-lg pl-10 pr-10 py-sm font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all" placeholder="Search contacts or handles..." type="text"/>
+<button class="absolute right-sm top-1/2 transform -translate-y-1/2 text-outline hover:text-on-surface flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="close" style="font-size: 18px;">close</span>
+</button>
+</div>
+<!-- Filter Chips -->
+<div class="flex gap-sm overflow-x-auto pb-1 scrollbar-hide">
+<button class="flex-shrink-0 px-4 py-1.5 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm border border-transparent shadow-sm">All</button>
+<button class="flex-shrink-0 px-4 py-1.5 rounded-full bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm border border-outline-variant hover:bg-surface-container-high transition-colors">WhatsApp</button>
+<button class="flex-shrink-0 px-4 py-1.5 rounded-full bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm border border-outline-variant hover:bg-surface-container-high transition-colors">Tinder</button>
+<button class="flex-shrink-0 px-4 py-1.5 rounded-full bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm border border-outline-variant hover:bg-surface-container-high transition-colors">Bumble</button>
+<button class="flex-shrink-0 px-4 py-1.5 rounded-full bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm border border-outline-variant hover:bg-surface-container-high transition-colors">Hinge</button>
+</div>
+</div>
+</div>
+<!-- Contact List Grid -->
+<div class="md:col-span-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md z-10 relative">
+<!-- Contact Card 1: Enabled, Low Risk -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-[0px_2px_4px_rgba(0,0,0,0.05)] p-md flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary-container"></div>
+<div class="flex justify-between items-start mb-md pl-xs">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden">
+<img class="object-cover w-full h-full" data-alt="A professional headshot of a young woman with dark hair against a minimalist corporate grey background, highly detailed, well-lit, standard modern tech profile aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdZY9MP3Zr97SZ1LuyMJi0-eVD2cgcuxN9oVtaTIre9n1mbTixwocYT59xgD80PJ7crlN-CgkiUFpHiXrvOIbhzkiPTKZ13ZFe8g3FVkJa1XGBujZEfKaw0otyFbKypLakDgjiyrqjiv5mF3ttsXZsd9fBl-XN3z6w2ewNJWSFjUxi31MlDzmtzV4B_R57NqbUcEfUPCmDge8Sv26ck8T_T2s-pGUa4Q6FvYaKbGMfqJFTiqy-ptoA"/>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface leading-tight">Sarah Jenkins</h3>
+<div class="flex items-center gap-xs mt-0.5">
+<span class="material-symbols-outlined text-outline text-[14px]" data-icon="forum">forum</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-[12px]">WhatsApp</span>
+</div>
+</div>
+</div>
+<!-- Status Indicator -->
+<div class="bg-secondary/10 text-secondary px-2 py-0.5 rounded font-label-sm text-label-sm uppercase tracking-widest flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                        Active
+                    </div>
+</div>
+<div class="flex justify-between items-center border-t border-surface-container pt-sm pl-xs">
+<!-- Risk Level -->
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant mb-0.5">RISK ASSESSMENT</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-secondary text-[16px]" data-icon="check_circle">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface text-[13px]">Low Protocol</span>
+</div>
+</div>
+<!-- Toggle -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-outline-variant after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+<!-- Contact Card 2: Enabled, High Risk -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-[0px_2px_4px_rgba(0,0,0,0.05)] p-md flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-tertiary-container"></div>
+<div class="flex justify-between items-start mb-md pl-xs">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-outline" data-icon="person">person</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface leading-tight">Mike_89</h3>
+<div class="flex items-center gap-xs mt-0.5">
+<span class="material-symbols-outlined text-outline text-[14px]" data-icon="local_fire_department">local_fire_department</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-[12px]">Tinder</span>
+</div>
+</div>
+</div>
+<!-- Status Indicator -->
+<div class="bg-secondary/10 text-secondary px-2 py-0.5 rounded font-label-sm text-label-sm uppercase tracking-widest flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                        Active
+                    </div>
+</div>
+<div class="flex justify-between items-center border-t border-surface-container pt-sm pl-xs">
+<!-- Risk Level -->
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant mb-0.5">RISK ASSESSMENT</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-tertiary text-[16px]" data-icon="warning">warning</span>
+<span class="font-body-md text-body-md text-tertiary font-medium text-[13px]">High Exposure</span>
+</div>
+</div>
+<!-- Toggle -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-outline-variant after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+<!-- Contact Card 3: Disabled -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-[0px_2px_4px_rgba(0,0,0,0.05)] p-md flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden opacity-75">
+<div class="absolute top-0 left-0 w-1 h-full bg-outline"></div>
+<div class="flex justify-between items-start mb-md pl-xs">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-outline" data-icon="group">group</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface-variant leading-tight line-through">Project Alpha Team</h3>
+<div class="flex items-center gap-xs mt-0.5">
+<span class="material-symbols-outlined text-outline text-[14px]" data-icon="forum">forum</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-[12px]">WhatsApp</span>
+</div>
+</div>
+</div>
+<!-- Status Indicator -->
+<div class="bg-surface-variant text-on-surface-variant px-2 py-0.5 rounded font-label-sm text-label-sm uppercase tracking-widest flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                        Paused
+                    </div>
+</div>
+<div class="flex justify-between items-center border-t border-surface-container pt-sm pl-xs">
+<!-- Risk Level -->
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant mb-0.5">RISK ASSESSMENT</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-outline text-[16px]" data-icon="remove_circle_outline">remove_circle_outline</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-[13px]">N/A (Inactive)</span>
+</div>
+</div>
+<!-- Toggle -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-outline-variant after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB for adding new contact -->
+<div class="fixed bottom-lg right-lg z-50">
+<button class="bg-primary-container hover:bg-primary text-on-primary-container p-4 rounded-xl shadow-lg flex items-center justify-center transition-transform hover:scale-105 active:scale-95 group">
+<span class="material-symbols-outlined" data-icon="person_add">person_add</span>
+</button>
+</div>
+</body></html>

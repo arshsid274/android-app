@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sentience Core - Enable Notifications</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#930010",
+                        "tertiary-fixed": "#ffdad6",
+                        "secondary-fixed": "#92f1fe",
+                        "primary-fixed-dim": "#adc7ff",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#b91a20",
+                        "surface-dim": "#d9dadb",
+                        "inverse-primary": "#adc7ff",
+                        "tertiary-container": "#dd3635",
+                        "on-background": "#191c1d",
+                        "surface-container": "#edeeef",
+                        "error": "#ba1a1a",
+                        "background": "#f8f9fa",
+                        "surface-container-high": "#e7e8e9",
+                        "secondary-container": "#8feefc",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#001a41",
+                        "surface-container-highest": "#e1e3e4",
+                        "primary-fixed": "#d8e2ff",
+                        "on-secondary-fixed": "#001f23",
+                        "primary": "#005bbf",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-surface": "#191c1d",
+                        "on-primary-container": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#005bc0",
+                        "on-surface-variant": "#414754",
+                        "on-secondary-fixed-variant": "#004f56",
+                        "on-error-container": "#93000a",
+                        "outline": "#727785",
+                        "surface-container-low": "#f3f4f5",
+                        "tertiary-fixed-dim": "#ffb3ac",
+                        "secondary": "#006972",
+                        "surface-bright": "#f8f9fa",
+                        "on-primary-fixed-variant": "#004493",
+                        "secondary-fixed-dim": "#75d5e2",
+                        "inverse-surface": "#2e3132",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#006d77",
+                        "on-tertiary-container": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c1c6d6",
+                        "on-tertiary-fixed": "#410003",
+                        "surface-variant": "#e1e3e4",
+                        "surface": "#f8f9fa",
+                        "primary-container": "#1a73e8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "xl": "32px",
+                        "margin-mobile": "16px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "base": "8px",
+                        "margin-desktop": "64px",
+                        "md": "16px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-lg": ["JetBrains Mono"],
+                        "headline-sm": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .blueprint-grid {
+            background-size: 20px 20px;
+            background-image: 
+                linear-gradient(to right, rgba(0, 91, 191, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 91, 191, 0.05) 1px, transparent 1px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background min-h-screen font-body-lg text-on-background blueprint-grid flex flex-col pt-16 pb-16">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline fixed top-0 w-full z-50 transition-opacity duration-150 active:opacity-70">
+<div class="flex justify-between items-center px-margin-mobile py-base w-full max-w-screen-xl mx-auto h-16">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" data-icon="memory">memory</span>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Sentience Core</span>
+</div>
+<button class="bg-error text-on-error font-label-lg text-label-lg px-md py-sm rounded shadow-md hover:opacity-90 active:scale-95 transition-all">
+                KILL SWITCH
+            </button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center px-margin-mobile w-full max-w-screen-md mx-auto">
+<!-- Notification Grant Card (Level 1 Elevation) -->
+<div class="bg-surface border border-outline-variant rounded-xl p-lg flex flex-col items-center text-center shadow-[0_2px_4px_rgba(0,0,0,0.05)] max-w-sm w-full">
+<!-- Technical Illustration Placeholder -->
+<div class="w-24 h-24 mb-lg flex items-center justify-center rounded-full bg-secondary-container bg-opacity-20 relative">
+<span class="material-symbols-outlined text-[48px] text-secondary" data-icon="notifications_active" data-weight="fill" style="font-variation-settings: 'FILL' 1;">notifications_active</span>
+<!-- decorative data lines -->
+<div class="absolute inset-0 border border-secondary rounded-full opacity-30 scale-110 animate-pulse"></div>
+<div class="absolute inset-0 border border-secondary rounded-full opacity-10 scale-125"></div>
+</div>
+<!-- Copy -->
+<h1 class="font-headline-sm text-headline-sm text-on-surface mb-sm">Stay in the Loop</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mb-xl">
+                Allow Sentience Core to send you real-time alerts when AI drafts are ready or when security protocols are triggered.
+            </p>
+<!-- Actions -->
+<div class="w-full flex flex-col gap-sm">
+<button class="w-full bg-primary text-on-primary font-label-lg text-label-lg py-sm rounded hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm">
+                    Allow Notifications
+                </button>
+<button class="w-full bg-transparent text-primary font-label-lg text-label-lg py-sm rounded hover:bg-surface-container-high transition-colors">
+                    Maybe Later
+                </button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Transaction/Linear exception rule - suppressed if strictly transactional, but requested in prompt) -->
+<!-- Assuming this is a settings sub-flow where the shell is requested -->
+<nav class="bg-surface-container dark:bg-surface-container-lowest border-t border-outline-variant fixed bottom-0 left-0 w-full flex justify-around items-center h-16 px-gutter pb-safe z-50 md:hidden shadow-md">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-variant rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm mt-xs">Home</span>
+</a>
+<!-- Chats -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-variant rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+<span class="font-label-sm text-label-sm mt-xs">Chats</span>
+</a>
+<!-- Activity -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-variant rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-sm text-label-sm mt-xs">Activity</span>
+</a>
+<!-- Settings (Active) -->
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-fixed-dim text-on-secondary-container dark:text-on-secondary-fixed rounded-full px-4 py-1 scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings" data-weight="fill" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-label-sm text-label-sm mt-xs">Settings</span>
+</a>
+</nav>
+<!-- Desktop Nav Shell (Hidden on mobile) -->
+<nav class="hidden md:flex bg-surface-container border-r border-outline-variant fixed left-0 top-16 bottom-0 w-64 flex-col py-lg px-md z-40">
+<a class="flex items-center gap-sm p-sm rounded hover:bg-surface-container-highest mb-sm text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-lg text-label-lg">Home</span>
+</a>
+<a class="flex items-center gap-sm p-sm rounded hover:bg-surface-container-highest mb-sm text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+<span class="font-label-lg text-label-lg">Chats</span>
+</a>
+<a class="flex items-center gap-sm p-sm rounded hover:bg-surface-container-highest mb-sm text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-lg text-label-lg">Activity</span>
+</a>
+<a class="flex items-center gap-sm p-sm rounded bg-secondary-container text-on-secondary-container mb-sm" href="#">
+<span class="material-symbols-outlined" data-icon="settings" data-weight="fill" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-label-lg text-label-lg">Settings</span>
+</a>
+</nav>
+</body></html>
