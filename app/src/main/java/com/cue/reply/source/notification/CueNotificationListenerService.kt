@@ -49,7 +49,10 @@ class CueNotificationListenerService : NotificationListenerService() {
         }
         val notification = sbn.notification ?: return
 
-        val title = notification.extras.getCharSequence(Notification.EXTRA_TITLE)?.toString()
+        val rawTitle = notification.extras.getCharSequence(Notification.EXTRA_TITLE)?.toString()
+        // WhatsApp appends a running count to grouped notifications ("Ana (3 messages)").
+        // Left in, every new message would spawn a brand-new conversation.
+        val title = rawTitle?.replace(MESSAGE_COUNT_SUFFIX, "")?.trim()
         val contactKey = title?.takeIf { it.isNotBlank() } ?: sbn.key
         val threadKey = "${ServiceType.WHATSAPP.packageName}::$contactKey"
 
@@ -67,7 +70,18 @@ class CueNotificationListenerService : NotificationListenerService() {
         val latest = messages.last()
         val text = latest.text?.toString()?.trim().orEmpty()
         if (text.isEmpty()) return
-        val incoming = latest.person != null
+
+        // A reply we sent through RemoteInput comes straight back in this notification's
+        // history, attributed to the self Person. Treated as inbound it would trigger a
+        // fresh draft for our own words — an endless self-conversation.
+        val selfName = style.user?.name?.toString()
+        val fromSelf = latest.person == null ||
+            (selfName != null && latest.person?.name?.toString() == selfName) ||
+            recentlySent.contains(text)
+        val incoming = !fromSelf
+        if (fromSelf) {
+            Log.d(TAG, "self message ignored as inbound: ${text.take(40)}")
+        }
 
         Log.d(TAG, "emit pkg=${sbn.packageName} user=${sbn.user} contact=$contactKey incoming=$incoming len=${text.length}")
         _events.tryEmit(
@@ -107,5 +121,24 @@ class CueNotificationListenerService : NotificationListenerService() {
 
         /** threadKey -> latest RemoteInput reply action. Read by RemoteInputReplySink. */
         val pendingReplies = java.util.concurrent.ConcurrentHashMap<String, ReplyAction>()
+
+        private val MESSAGE_COUNT_SUFFIX = Regex("""\s*\(\d+\s+messages?\)\s*$""")
+
+        /**
+         * Texts this app just sent, so the echo arriving back through the
+         * notification is recognised even when the self Person is unnamed.
+         */
+        private val recentlySent = java.util.Collections.newSetFromMap(
+            java.util.concurrent.ConcurrentHashMap<String, Boolean>()
+        )
+
+        fun rememberSent(text: String) {
+            val trimmed = text.trim()
+            if (trimmed.isEmpty()) return
+            recentlySent.add(trimmed)
+            if (recentlySent.size > 50) {
+                recentlySent.iterator().let { if (it.hasNext()) { it.next(); it.remove() } }
+            }
+        }
     }
 }

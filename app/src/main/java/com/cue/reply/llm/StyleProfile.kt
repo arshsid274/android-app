@@ -55,7 +55,9 @@ data class StyleProfile(
 
         /** Builds a profile from the user's outgoing messages in [history]. */
         fun from(history: List<MessageEntity>): StyleProfile {
-            val mine = history.filter { it.direction == MessageDirection.OUTGOING }
+            // Only messages the user actually wrote: learning from Cue's own auto-sends
+            // feeds its output back in and the voice collapses a little more each round.
+            val mine = history.filter { it.direction == MessageDirection.OUTGOING && !it.automated }
                 .map { it.text.trim() }
                 .filter { it.isNotEmpty() }
 

@@ -32,7 +32,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.sync.Mutex
 import java.util.concurrent.atomic.AtomicBoolean
+import java.util.concurrent.ConcurrentHashMap
 
 /**
  * Foreground service that keeps the sources alive and runs the per-message pipeline:
@@ -46,6 +49,11 @@ class OrchestratorService : Service() {
     private lateinit var overlay: OverlayController
 
     private var lastDrafts: Map<String, List<ReplyDraft>> = emptyMap()
+
+    /** One lock per conversation: parallel across chats, ordered within a chat. */
+    private val threadLocks = ConcurrentHashMap<String, Mutex>()
+    private fun threadMutex(threadKey: String): Mutex =
+        threadLocks.getOrPut(threadKey) { Mutex() }
 
     override fun onCreate() {
         super.onCreate()
@@ -83,15 +91,21 @@ class OrchestratorService : Service() {
         )
         scope.launch {
             merged.collect { message ->
-                runCatching { handle(message) }
-                    .onFailure {
-                        container.activityRepository.log(
-                            ActivityType.ERROR,
-                            message.threadKey,
-                            message.service,
-                            detail = it.message,
-                        )
+                // Each message runs on its own job: a long auto-send countdown must not
+                // stall the collector, or messages from other chats are missed entirely.
+                scope.launch {
+                    threadMutex(message.threadKey).withLock {
+                        runCatching { handle(message) }
+                            .onFailure {
+                                container.activityRepository.log(
+                                    ActivityType.ERROR,
+                                    message.threadKey,
+                                    message.service,
+                                    detail = it.message,
+                                )
+                            }
                     }
+                }
             }
         }
     }
@@ -219,7 +233,8 @@ class OrchestratorService : Service() {
                                 text = draft.text,
                                 direction = MessageDirection.OUTGOING,
                                 timestamp = System.currentTimeMillis(),
-                            )
+                            ),
+                            automated = true,
                         )
                     }
                     is DeliveryResult.Failed -> container.activityRepository.log(

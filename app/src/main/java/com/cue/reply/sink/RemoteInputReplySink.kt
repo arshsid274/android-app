@@ -28,6 +28,8 @@ class RemoteInputReplySink(private val context: Context) : ReplySink {
             val intent = Intent()
             val results = Bundle().apply { putCharSequence(action.resultKey, text) }
             RemoteInput.addResultsToIntent(action.remoteInputs, intent, results)
+            // Record before sending: the echo notification can arrive immediately.
+            CueNotificationListenerService.rememberSent(text)
             action.pendingIntent.send(context, 0, intent)
             DeliveryResult.Sent
         } catch (e: Exception) {

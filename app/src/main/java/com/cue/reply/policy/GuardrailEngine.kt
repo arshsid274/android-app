@@ -42,10 +42,14 @@ class GuardrailEngine(
             return PolicyDecision.Deny(ActivityType.RATE_LIMITED, "Hourly reply cap reached")
         }
 
-        // Loop-breaker: too many automated exchanges without human input in a row.
-        val recentAuto = activity.countWithin(ActivityType.AUTO_SENT, 10 * 60 * 1000L)
-        if (recentAuto >= settings.loopBreakerStreak) {
-            return PolicyDecision.Deny(ActivityType.RATE_LIMITED, "Loop-breaker: too many auto-sends recently")
+        // Loop-breaker: consecutive automated sends in THIS thread with no reply from
+        // the other person in between. A normal back-and-forth resets it every turn.
+        val unanswered = activity.autoSentSinceLastInbound(threadKey)
+        if (unanswered >= settings.loopBreakerStreak) {
+            return PolicyDecision.Deny(
+                ActivityType.RATE_LIMITED,
+                "Loop-breaker: $unanswered auto-sends with no reply from them",
+            )
         }
 
         val hold = randomHold(settings)

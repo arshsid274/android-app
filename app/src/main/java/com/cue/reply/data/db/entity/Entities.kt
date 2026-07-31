@@ -21,6 +21,8 @@ data class MessageEntity(
     val text: String,
     val direction: MessageDirection,
     val timestamp: Long,
+    /** True when Cue itself sent this. Excluded from voice learning — it is not the user. */
+    val automated: Boolean = false,
 )
 
 /** Per-conversation summary + per-thread flags (allowlist, mute). */

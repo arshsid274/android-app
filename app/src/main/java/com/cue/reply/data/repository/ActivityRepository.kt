@@ -39,6 +39,16 @@ class ActivityRepository(
     suspend fun countWithin(type: ActivityType, windowMs: Long): Int =
         dao.countSince(type, clock() - windowMs)
 
+    /**
+     * Automated sends in one thread since the last time that person actually wrote.
+     * This is the loop-breaker's real question — "am I talking to myself?" — which a
+     * global count answers wrongly: a busy chat would mute every other chat.
+     */
+    suspend fun autoSentSinceLastInbound(threadKey: String): Int {
+        val lastInbound = dao.lastTimestampOf(ActivityType.RECEIVED, threadKey) ?: return 0
+        return dao.countSinceForThread(ActivityType.AUTO_SENT, threadKey, lastInbound)
+    }
+
     suspend fun pruneOlderThan(cutoff: Long) = dao.deleteOlderThan(cutoff)
 
     suspend fun clear() = dao.clear()

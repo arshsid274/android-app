@@ -186,8 +186,28 @@ fun SettingsScreen(vm: CueViewModel) {
                 },
             )
             HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
-            KeyValueRow("Replies per hour", "${settings.repliesPerHour}")
-            KeyValueRow("Loop-breaker streak", "${settings.loopBreakerStreak}")
+            StepSlider(
+                label = "Replies per hour",
+                value = settings.repliesPerHour,
+                range = 1f..100f,
+                steps = 98,
+                format = { "$it / hour" },
+                help = "Hard ceiling on automated sends in any rolling hour. " +
+                    "Hitting it logs RATE_LIMITED and pauses auto-send until the hour rolls on.",
+                onChange = { v -> vm.update { it.copy(repliesPerHour = v) } },
+            )
+            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+            StepSlider(
+                label = "Loop-breaker",
+                value = settings.loopBreakerStreak,
+                range = 1f..20f,
+                steps = 18,
+                format = { if (it == 1) "1 unanswered reply" else "$it unanswered replies" },
+                help = "Stops auto-sending in a chat after this many replies the other " +
+                    "person hasn't answered. Resets the moment they write back.",
+                onChange = { v -> vm.update { it.copy(loopBreakerStreak = v) } },
+            )
+            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
             KeyValueRow("Send-verify cap", "${settings.sendVerifyMax} (fixed)")
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -566,6 +586,47 @@ private fun AutoReplyDelaySlider(ceilMs: Long, onChange: (Int) -> Unit) {
             else
                 "Waits a random ${formatDelay((sliderValue.toInt() * 0.6f).toInt())}–" +
                     "${formatDelay(sliderValue.toInt())} so replies look typed, not triggered.",
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+    }
+}
+
+/** Integer slider with a live readout and a line explaining what the limit does. */
+@Composable
+private fun StepSlider(
+    label: String,
+    value: Int,
+    range: ClosedFloatingPointRange<Float>,
+    steps: Int,
+    format: (Int) -> String,
+    help: String,
+    onChange: (Int) -> Unit,
+) {
+    var sliderValue by remember(value) { mutableStateOf(value.toFloat()) }
+    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(label, style = MaterialTheme.typography.bodyMedium)
+            Text(
+                format(sliderValue.toInt()),
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.primary,
+            )
+        }
+        Slider(
+            value = sliderValue,
+            onValueChange = { sliderValue = it },
+            onValueChangeFinished = { onChange(sliderValue.toInt()) },
+            valueRange = range,
+            steps = steps,
+            modifier = Modifier.fillMaxWidth(),
+        )
+        Text(
+            help,
             style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )

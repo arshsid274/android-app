@@ -15,7 +15,7 @@ class ConversationRepository(
     private val conversationDao: ConversationDao,
 ) {
     /** Store an observed message and update its conversation head. */
-    suspend fun record(message: IncomingMessage) {
+    suspend fun record(message: IncomingMessage, automated: Boolean = false) {
         // The same outgoing text can arrive twice: once recorded at send time and
         // again echoed back through the notification's message history. Keep one.
         val latest = messageDao.recentForThread(message.threadKey, 1).firstOrNull()
@@ -31,6 +31,7 @@ class ConversationRepository(
                 text = message.text,
                 direction = message.direction,
                 timestamp = message.timestamp,
+                automated = automated,
             )
         )
         val existing = conversationDao.get(message.threadKey)

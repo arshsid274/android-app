@@ -88,6 +88,17 @@ interface ActivityLogDao {
     @Query("SELECT COUNT(*) FROM activity_log WHERE type = :type AND timestamp >= :since")
     suspend fun countSince(type: ActivityType, since: Long): Int
 
+    @Query(
+        "SELECT MAX(timestamp) FROM activity_log WHERE type = :type AND threadKey = :threadKey"
+    )
+    suspend fun lastTimestampOf(type: ActivityType, threadKey: String): Long?
+
+    @Query(
+        "SELECT COUNT(*) FROM activity_log " +
+            "WHERE type = :type AND threadKey = :threadKey AND timestamp >= :since"
+    )
+    suspend fun countSinceForThread(type: ActivityType, threadKey: String, since: Long): Int
+
     @Query("DELETE FROM activity_log WHERE timestamp < :cutoff")
     suspend fun deleteOlderThan(cutoff: Long)
 

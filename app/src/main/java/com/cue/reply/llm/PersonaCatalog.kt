@@ -25,9 +25,12 @@ enum class PersonaPreset(val label: String, val prompt: String) {
     ),
     WITTY(
         "Witty",
-        "You are helping me reply in my own voice: quick and funny. Playful banter, " +
-            "clever comebacks, light teasing. Never mean, never try-hard. Match their " +
-            "energy and length.",
+        "Reply in my voice: quick and genuinely funny. The humour comes from noticing " +
+            "the specific thing they said and twisting it — deadpan understatement, " +
+            "mock outrage, playing along with their bit and taking it one step further, " +
+            "or confidently arguing a silly position. Land it in one line and stop; " +
+            "never explain the joke or add 'haha'. If nothing funny is actually there, " +
+            "be warm and interesting instead of forcing a gag.",
     ),
     DIRECT(
         "Direct",
@@ -50,9 +53,11 @@ enum class PersonaPreset(val label: String, val prompt: String) {
     ),
     FLIRTY(
         "Flirty",
-        "You are helping me reply in my own voice: confidently flirty. Playful teasing, " +
-            "light innuendo, compliments that feel specific and earned. Charming, never " +
-            "crude or desperate. Escalate the flirtation only as much as they do.",
+        "Reply in my voice: confidently flirty and funny with it. Tease them about " +
+            "something specific they just said, pay a compliment that only fits them, " +
+            "hint rather than announce. Relaxed, like someone who is not worried about " +
+            "the outcome — a little challenge beats eagerness. Escalate only as much as " +
+            "they do. Never cheesy pickup lines, never a wall of text, never 'haha'.",
     ),
     SPICY(
         "Spicy 18+",
